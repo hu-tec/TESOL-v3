@@ -10,6 +10,7 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
+  base: '/TESOL/page2/',
   resolve: {
     alias: {
       // Alias @ to the src directory

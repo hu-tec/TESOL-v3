@@ -36,10 +36,21 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-      - name: Install dependencies
+      - name: Install dependencies (Root)
         run: npm install
-      - name: Build
+      - name: Build (Root)
         run: npm run build
+      - name: Install dependencies (Page2)
+        run: |
+          cd page2
+          npm install
+      - name: Build (Page2)
+        run: |
+          cd page2
+          npm run build
+      - name: Combine builds
+        run: |
+          mv page2/dist dist/page2
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact

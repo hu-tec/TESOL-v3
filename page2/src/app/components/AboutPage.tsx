@@ -356,7 +356,7 @@ export function AboutPage() {
                 ].map((item, i) => (
                   <div key={i} className="bg-white p-4 border border-gray-100 hover:shadow-sm transition-shadow flex items-center gap-4">
                     <div className="w-12 h-12 bg-white flex-shrink-0 flex items-center justify-center border border-gray-100">
-                      <ImageWithFallback src={`/img/logo/center_${i+1}.png`} alt={item.title} className="max-w-[90%] max-h-[90%] object-contain" />
+                      <ImageWithFallback src={`img/logo/center_${i+1}.png`} alt={item.title} className="max-w-[90%] max-h-[90%] object-contain" />
                     </div>
                     <div>
                       <h4 className="text-[14px] text-[#1a1a2e] font-bold">{item.title}</h4>
@@ -386,7 +386,7 @@ export function AboutPage() {
                 ].map((item, i) => (
                   <div key={i} className="bg-white p-4 border border-gray-100 hover:shadow-sm transition-shadow flex items-center gap-4">
                     <div className="w-12 h-12 bg-white flex-shrink-0 flex items-center justify-center border border-gray-100">
-                      <ImageWithFallback src={`/img/logo/partner_${i+1}.${i === 7 ? 'jpg' : 'png'}`} alt={item.name} className="max-w-[90%] max-h-[90%] object-contain" />
+                      <ImageWithFallback src={`img/logo/partner_${i+1}.${i === 7 ? 'jpg' : 'png'}`} alt={item.name} className="max-w-[90%] max-h-[90%] object-contain" />
                     </div>
                     <div>
                       <h4 className="text-[14px] text-[#1a1a2e] font-bold">{item.name}</h4>
@@ -419,7 +419,7 @@ export function AboutPage() {
                   <div key={i} className="bg-white p-3 border border-gray-100 flex items-center justify-between hover:shadow-sm transition-shadow group">
                     <div className="flex items-center gap-3">
                       <div className="w-12 h-12 bg-white flex-shrink-0 flex items-center justify-center border border-gray-100">
-                        <ImageWithFallback src={`/img/logo/global_${i+1}.png`} alt={item.name} className="max-w-[90%] max-h-[90%] object-contain" />
+                        <ImageWithFallback src={`img/logo/global_${i+1}.png`} alt={item.name} className="max-w-[90%] max-h-[90%] object-contain" />
                       </div>
                       <span className="text-[13px] text-[#1a1a2e] font-bold">{item.name}</span>
                     </div>
@@ -448,7 +448,7 @@ export function AboutPage() {
                 ].map((item, i) => (
                   <div key={i} className="bg-white p-4 border border-gray-100 hover:shadow-sm transition-shadow flex items-center gap-4">
                     <div className="w-12 h-12 bg-gray-50 flex-shrink-0 flex items-center justify-center border border-gray-100">
-                      <ImageWithFallback src={`/img/logo/overseas_${i+1}.png`} alt={item.title} className="max-w-[80%] max-h-[80%] object-contain grayscale opacity-60" />
+                      <ImageWithFallback src={`img/logo/overseas_${i+1}.png`} alt={item.title} className="max-w-[80%] max-h-[80%] object-contain grayscale opacity-60" />
                     </div>
                     <div>
                       <h4 className="text-[14px] text-[#1a1a2e] font-bold">{item.title}</h4>

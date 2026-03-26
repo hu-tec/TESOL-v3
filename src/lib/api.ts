@@ -1,6 +1,6 @@
 import type { Applicant } from "../app/components/types";
 
-const API_BASE_URL = "http://43.200.104.3:3000";
+const API_BASE_URL = "https://46rvoojmt0.execute-api.ap-northeast-2.amazonaws.com";
 
 export async function submitApplication(
   applicant: Applicant

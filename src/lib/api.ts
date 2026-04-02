@@ -1,11 +1,11 @@
 import type { Applicant } from "../app/components/types";
 
-const API_BASE_URL = "https://46rvoojmt0.execute-api.ap-northeast-2.amazonaws.com";
+const API_BASE_URL = "https://bmidcy9z17.execute-api.ap-northeast-2.amazonaws.com";
 
 export async function submitApplication(
   applicant: Applicant
-): Promise<{ success: boolean; applicant_id?: string }> {
-  const response = await fetch(`${API_BASE_URL}/api/tesol`, {
+): Promise<{ success: boolean; id?: number }> {
+  const response = await fetch(`${API_BASE_URL}/api/tesol_expert_applications`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(applicant),

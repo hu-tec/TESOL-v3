@@ -201,12 +201,12 @@ export function AboutPage() {
           <span className="text-[#e8a0a0] text-[12px] tracking-[0.2em] uppercase mb-6 block" style={{ fontWeight: 600 }}>
             Why TESOL & Translation, Why Now?
           </span>
-          <h2 className="text-[24px] lg:text-[30px] text-white mb-6" style={{ fontWeight: 700, lineHeight: 1.4 }}>
+          <h2 className="text-[25px] text-white mb-6" style={{ fontWeight: 700, lineHeight: 1.4 }}>
             AI가 언어의 경계를 무너뜨리고 있지만,<br className="hidden lg:block" />
             단어를 '이해'하고, 맥락을 '전달'하는 일은{" "}
             <span className="text-[#e8a0a0]">여전히 사람의 영역</span>입니다.
           </h2>
-          <div className="space-y-4 text-white/60 text-[15px] max-w-3xl mx-auto mb-10" style={{ lineHeight: 1.8 }}>
+          <div className="space-y-4 text-white/60 text-[12px] max-w-3xl mx-auto mb-10" style={{ lineHeight: 1.8 }}>
             <p>AI 번역은 의미를 전달하지만, 사람은 관계와 감정을 함께 전달합니다.</p>
             <p>프롬프트 시대일수록, AI를 활용하는 사람의 판단력과 기획력이 경쟁력입니다.</p>
             <p>TESOL 교사교육, ITT 정통 언어(통역·번역)교육, 그리고 AI 자격교육은 미래 비즈니스, 글로벌 교류를 위한 핵심 무기입니다.</p>

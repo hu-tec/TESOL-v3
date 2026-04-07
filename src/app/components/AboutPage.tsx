@@ -336,7 +336,7 @@ export function AboutPage() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            
+
             {/* Column 1: 전 대학 교육장 소개 */}
             <div className="space-y-6">
               <div className="flex items-center gap-3 pb-2 border-b-2 border-[#8B1A2B]">
@@ -345,8 +345,8 @@ export function AboutPage() {
               </div>
               <div className="space-y-2">
                 {[
-                  "연세대학교", "한동대학교", "단국대학교", "동국대학교", 
-                  "부산대학교", "영남대학교", "한림대학교", "동아대학교", 
+                  "연세대학교", "한동대학교", "단국대학교", "동국대학교",
+                  "부산대학교", "영남대학교", "한림대학교", "동아대학교",
                   "서울교육대학교", "충남대학교"
                 ].map((name, i) => (
                   <div key={i} className="bg-white px-4 py-3 border border-gray-100 hover:shadow-sm transition-shadow">
@@ -364,8 +364,8 @@ export function AboutPage() {
               </div>
               <div className="space-y-2">
                 {[
-                  "코리아 헤럴드 교육센터", "코리아 타임스 교육센터", "CBS교육 센터", 
-                  "부산 KNN 교육센터", "중앙일보 IT 데일리", "국제통역번역협회", 
+                  "코리아 헤럴드 교육센터", "코리아 타임스 교육센터", "CBS교육 센터",
+                  "부산 KNN 교육센터", "중앙일보 IT 데일리 교육센터", "국제통역번역협회",
                   "한국 번역학회"
                 ].map((name, i) => (
                   <div key={i} className="bg-white px-4 py-3 border border-gray-100 hover:shadow-sm transition-shadow">
@@ -383,9 +383,9 @@ export function AboutPage() {
               </div>
               <div className="space-y-2">
                 {[
-                  "캐나다 교육 센터", "중국 교육센터", "미국 교육센터", 
-                  "캘리포니아 주립대학교-롱비치", "캘리포니아 주립대학교-샌버나디노", 
-                  "플로리다 대학교"
+                  "캐나다 교육 센터", "중국 교육센터", "미국 교육센터",
+                  "캘리포니아 주립대학교-롱비치", "캘리포니아 주립대학교-샌버나디노"
+
                 ].map((name, i) => (
                   <div key={i} className="bg-white px-4 py-3 border border-gray-100 hover:shadow-sm transition-shadow">
                     <h4 className="text-[14px] text-[#1a1a2e] font-bold">{name}</h4>
@@ -402,14 +402,14 @@ export function AboutPage() {
               </div>
               <div className="space-y-2">
                 {[
-                  "UBC", "STIBC", "Purdue University", "CSULB", 
-                  "USM", "IVY Tech", "호주 NATTI"
+                  "UBC", "STIBC", "Purdue University", "CSULB",
+                  "USM", "IVY TECH", "호주 NATTI", "미국 콩코디아 대학교"
                 ].map((name, i) => (
                   <div key={i} className="bg-white px-4 py-3 border border-gray-100 hover:shadow-sm transition-shadow">
                     <h4 className="text-[14px] text-[#1a1a2e] font-bold">{name}</h4>
                   </div>
                 ))}
-                
+
                 <div className="mt-8 pt-4 border-t border-gray-200">
                   <div className="grid grid-cols-2 gap-2">
                     {["TIMES TESOL", "ITT 시험본부", "TIMES HR", "ICS국제학교"].map((name, i) => (

@@ -88,7 +88,7 @@ export function AboutPage() {
               <span className="text-[#e8a0a0] text-[12px] tracking-[0.2em] uppercase mb-4 block" style={{ fontWeight: 600 }}>
                 About Times Media
               </span>
-              <h1 className="text-[28px] lg:text-[38px] text-white mb-4" style={{ fontWeight: 700, lineHeight: 1.3 }}>
+              <h1 className="text-[32px] text-white mb-4" style={{ fontWeight: 700, lineHeight: 1.3 }}>
                 AI 시대에도, 사람을 키우는 건<br />
                 결국 사람입니다.
               </h1>

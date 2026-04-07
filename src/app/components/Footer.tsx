@@ -70,7 +70,6 @@ export function Footer() {
           <div>
             <h4 className="text-white text-[15px] mb-5" style={{ fontWeight: 700 }}>학사소개</h4>
             <div className="space-y-3 text-[13px]">
-              <Link to="/about" className="block hover:text-white transition-colors underline decoration-[#8B1A2B] decoration-2 underline-offset-4">교육원 소개</Link>
               <Link to="/admission" className="block hover:text-white transition-colors">학사소개</Link>
               <Link to="/admission" className="block hover:text-white transition-colors">입학 안내</Link>
             </div>

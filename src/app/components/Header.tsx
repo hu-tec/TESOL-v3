@@ -159,6 +159,13 @@ export function Header() {
             >
               수강 신청
             </Link>
+            <Link
+              to="/about"
+              className="hidden lg:inline-flex items-center px-6 py-2.5 border border-[#8B1A2B] text-[#8B1A2B] rounded text-[14px] hover:bg-red-50 transition-colors"
+              style={{ fontWeight: 600 }}
+            >
+              교육원 소개
+            </Link>
             <button
               className="lg:hidden p-2 text-gray-700"
               onClick={() => setMobileOpen(!mobileOpen)}
@@ -198,23 +205,33 @@ export function Header() {
                   )}
                 </div>
               ))}
-              <div className="pt-3 px-4 flex gap-3">
+              <div className="pt-3 px-4 flex flex-col gap-2">
                 <Link
-                  to="/login"
-                  className="flex-1 text-center py-2.5 border border-gray-200 text-gray-700 rounded text-[14px]"
-                  style={{ fontWeight: 500 }}
-                  onClick={() => setMobileOpen(false)}
-                >
-                  로그인
-                </Link>
-                <Link
-                  to="/apply/orientation"
-                  className="flex-1 text-center py-2.5 bg-[#8B1A2B] text-white rounded text-[14px]"
+                  to="/about"
+                  className="w-full text-center py-2.5 border border-[#8B1A2B] text-[#8B1A2B] rounded text-[14px]"
                   style={{ fontWeight: 600 }}
                   onClick={() => setMobileOpen(false)}
                 >
-                  수강 신청
+                  교육원 소개
                 </Link>
+                <div className="flex gap-3">
+                  <Link
+                    to="/login"
+                    className="flex-1 text-center py-2.5 border border-gray-200 text-gray-700 rounded text-[14px]"
+                    style={{ fontWeight: 500 }}
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    로그인
+                  </Link>
+                  <Link
+                    to="/apply/orientation"
+                    className="flex-1 text-center py-2.5 bg-[#8B1A2B] text-white rounded text-[14px]"
+                    style={{ fontWeight: 600 }}
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    수강 신청
+                  </Link>
+                </div>
               </div>
             </div>
           </div>

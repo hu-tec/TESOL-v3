@@ -15,25 +15,25 @@ export function ContactPage() {
   return (
     <div>
       <Toaster position="top-center" />
-      {/* Hero */}
-      <section className="bg-[#1a1a2e] py-16">
-        <div className="max-w-[1200px] mx-auto px-6 text-center">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-            <span className="text-[#e8a0a0] text-[12px] tracking-[0.2em] uppercase mb-4 block" style={{ fontWeight: 600 }}>
-              Contact Us
-            </span>
-            <h1 className="text-[30px] lg:text-[40px] text-white mb-3" style={{ fontWeight: 800 }}>1:1 문의</h1>
-            <p className="text-white/50 text-[16px]">궁금한 점이 있으시면 편하게 문의해주세요</p>
+
+      {/* Hero Section */}
+      <div className="theme-bg">
+        <div className="container relative z-10">
+          <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+            <h1 className="theme-title mb-4">1:1 문의</h1>
+            <p className="text-lg opacity-80" style={{maxWidth: '1000px', margin: '0 auto'}}>
+              궁금한 점이 있으시면 편하게 문의해주세요
+            </p>
           </motion.div>
         </div>
-      </section>
+      </div>
 
-      <section className="py-16">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="grid lg:grid-cols-5 gap-10">
-            {/* Contact Info */}
-            <div className="lg:col-span-2 space-y-6">
-              <h2 className="text-[22px] text-[#1a1a2e] mb-6" style={{ fontWeight: 800 }}>연락처 정보</h2>
+      <div className="container py-16">
+        <div className="grid col-2 gap-8">
+          {/* Contact Info */}
+          <div>
+            <h3 className="section-title mb-6">연락처 정보</h3>
+            <div className="flex flex-col gap-4">
               {[
                 { icon: Phone, label: "대표전화", value: "02-6207-9090" },
                 { icon: Mail, label: "이메일", value: "hutechc01@gmail.com" },
@@ -42,73 +42,78 @@ export function ContactPage() {
               ].map((item) => {
                 const Icon = item.icon;
                 return (
-                  <div key={item.label} className="flex items-start gap-4 p-5 bg-[#faf8f6] border border-gray-100">
-                    <div className="w-11 h-11 bg-[#8B1A2B] rounded-full flex items-center justify-center shrink-0">
-                      <Icon className="w-5 h-5 text-white" />
+                  <div key={item.label} className="card flex items-center p-6 gap-4 border-none shadow-sm pb-4">
+                    <div className="shrink-0 flex items-center justify-center p-3 rounded-full bg-primary text-white">
+                      <Icon className="text-white" style={{color: 'var(--white)'}} width={20} height={20} />
                     </div>
                     <div>
-                      <p className="text-[13px] text-gray-500 mb-0.5">{item.label}</p>
-                      <p className="text-[14px] text-[#1a1a2e]" style={{ fontWeight: 600 }}>{item.value}</p>
+                      <p className="text-sm text-muted mb-1">{item.label}</p>
+                      <p className="font-bold text-main">{item.value}</p>
                     </div>
                   </div>
                 );
               })}
-              <div className="bg-[#1a1a2e] p-6 text-center">
-                <MessageCircle className="w-10 h-10 text-white/60 mx-auto mb-3" />
-                <h3 className="text-white text-[16px] mb-1" style={{ fontWeight: 700 }}>빠른 상담</h3>
-                <p className="text-white/50 text-[13px] mb-4">카카오톡으로 빠르게 상담받으세요</p>
-                <a href="#" className="inline-flex px-6 py-2.5 bg-[#FEE500] text-[#3C1E1E] text-[14px] hover:bg-[#FDD835] transition" style={{ fontWeight: 700 }}>
+              <div className="bg-main text-white p-8 rounded-xl center mt-4 shadow-lg">
+                <MessageCircle style={{ width: 40, height: 40, color: 'rgba(255,255,255,0.6)', margin: '0 auto 12px' }} />
+                <h3 className="text-lg font-bold mb-1 text-white">빠른 상담</h3>
+                <p className="text-sm opacity-80 mb-6">카카오톡으로 빠르게 상담받으세요</p>
+                <a href="#" style={{
+                  display: 'inline-block', padding: '12px 28px', background: '#FEE500',
+                  color: '#3C1E1E', fontWeight: 700, borderRadius: '6px', fontSize: '0.95rem'
+                }}>
                   카카오톡 상담
                 </a>
               </div>
             </div>
+          </div>
 
-            {/* Form */}
-            <div className="lg:col-span-3">
-              <h2 className="text-[22px] text-[#1a1a2e] mb-6" style={{ fontWeight: 800 }}>문의하기</h2>
-              <form onSubmit={handleSubmit} className="bg-white p-8 border border-gray-100 space-y-5">
-                <div className="grid md:grid-cols-2 gap-5">
+          {/* Form */}
+          <div>
+            <h3 className="section-title mb-6">문의하기</h3>
+            <div className="card p-8 border-none shadow-sm">
+              <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+                <div className="grid col-2 gap-4">
                   <div>
-                    <label className="block text-[13px] text-gray-600 mb-1.5" style={{ fontWeight: 600 }}>이름 *</label>
+                    <label className="font-bold mb-2 block" style={{fontSize: '1rem'}}>이름 *</label>
                     <input
                       type="text"
                       required
                       value={form.name}
                       onChange={(e) => setForm({ ...form, name: e.target.value })}
-                      className="w-full px-4 py-3 bg-[#faf8f6] border border-gray-200 focus:border-[#8B1A2B] focus:ring-2 focus:ring-red-100 outline-none transition text-[14px]"
+                      className="input-field"
                       placeholder="이름을 입력하세요"
                     />
                   </div>
                   <div>
-                    <label className="block text-[13px] text-gray-600 mb-1.5" style={{ fontWeight: 600 }}>이메일 *</label>
+                    <label className="font-bold mb-2 block" style={{fontSize: '1rem'}}>이메일 *</label>
                     <input
                       type="email"
                       required
                       value={form.email}
                       onChange={(e) => setForm({ ...form, email: e.target.value })}
-                      className="w-full px-4 py-3 bg-[#faf8f6] border border-gray-200 focus:border-[#8B1A2B] focus:ring-2 focus:ring-red-100 outline-none transition text-[14px]"
+                      className="input-field"
                       placeholder="이메일을 입력하세요"
                     />
                   </div>
                 </div>
-                <div className="grid md:grid-cols-2 gap-5">
+                <div className="grid col-2 gap-4">
                   <div>
-                    <label className="block text-[13px] text-gray-600 mb-1.5" style={{ fontWeight: 600 }}>연락처</label>
+                    <label className="font-bold mb-2 block" style={{fontSize: '1rem'}}>연락처</label>
                     <input
                       type="tel"
                       value={form.phone}
                       onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                      className="w-full px-4 py-3 bg-[#faf8f6] border border-gray-200 focus:border-[#8B1A2B] focus:ring-2 focus:ring-red-100 outline-none transition text-[14px]"
+                      className="input-field"
                       placeholder="010-0000-0000"
                     />
                   </div>
                   <div>
-                    <label className="block text-[13px] text-gray-600 mb-1.5" style={{ fontWeight: 600 }}>문의 유형 *</label>
+                    <label className="font-bold mb-2 block" style={{fontSize: '1rem'}}>문의 유형 *</label>
                     <select
                       required
                       value={form.subject}
                       onChange={(e) => setForm({ ...form, subject: e.target.value })}
-                      className="w-full px-4 py-3 bg-[#faf8f6] border border-gray-200 focus:border-[#8B1A2B] focus:ring-2 focus:ring-red-100 outline-none transition text-[14px]"
+                      className="input-field"
                     >
                       <option value="">선택해주세요</option>
                       <option>TESOL 과정 문의</option>
@@ -122,29 +127,26 @@ export function ContactPage() {
                   </div>
                 </div>
                 <div>
-                  <label className="block text-[13px] text-gray-600 mb-1.5" style={{ fontWeight: 600 }}>문의 내용 *</label>
+                  <label className="font-bold mb-2 block" style={{fontSize: '1rem'}}>문의 내용 *</label>
                   <textarea
                     required
-                    rows={5}
+                    rows={6}
                     value={form.message}
                     onChange={(e) => setForm({ ...form, message: e.target.value })}
-                    className="w-full px-4 py-3 bg-[#faf8f6] border border-gray-200 focus:border-[#8B1A2B] focus:ring-2 focus:ring-red-100 outline-none transition text-[14px] resize-none"
+                    className="input-field"
                     placeholder="문의 내용을 입력하세요"
+                    style={{ resize: 'none' }}
                   />
                 </div>
-                <button
-                  type="submit"
-                  className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-[#8B1A2B] text-white hover:bg-[#6d1422] transition-colors"
-                  style={{ fontWeight: 700 }}
-                >
-                  <Send className="w-4 h-4" />
+                <button type="submit" className="btn-primary py-4 text-lg font-bold w-full flex items-center justify-center gap-2">
+                  <Send width={18} height={18} />
                   문의 보내기
                 </button>
               </form>
             </div>
           </div>
         </div>
-      </section>
+      </div>
     </div>
   );
 }

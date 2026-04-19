@@ -1,5 +1,7 @@
 import { Link } from "react-router";
 import { motion } from "motion/react";
+import { QuickNav, MobileQuickNav, CourseMenuBar } from "./QuickNav";
+import { ImageWithFallback } from "./figma/ImageWithFallback";
 import {
   ArrowRight,
   Zap,
@@ -17,9 +19,7 @@ import {
   Target,
   Star,
 } from "lucide-react";
-import { ImageWithFallback } from "./figma/ImageWithFallback";
-import { QuickNav, MobileQuickNav, CourseSubNav, CourseMenuBar } from "./QuickNav";
-import { CoreDesign } from "./CourseCommon";
+import { ChevronRight } from "lucide-react";
 
 import book1 from "figma:asset/d7f50a4487fd4631fc9eb9187afdfd969c599330.png";
 import book2 from "figma:asset/c8f9f248d34e3e489f1e6f368703df912a3a4326.png";
@@ -78,7 +78,7 @@ const outcomes = [
 ];
 
 const highlights = [
-  { icon: Clock, label: "8주 ��입, 집중 훈련", desc: "120시간 집중 훈련으로 영어로 수업을 할 수 있는 능력개발" },
+  { icon: Clock, label: "8주 집중 몰입, 집중 훈련", desc: "120시간 집중 훈련으로 영어로 수업을 할 수 있는 능력개발" },
   { icon: Users, label: "다국적 클래스", desc: "100% 영어 클래스 글로벌 소통 능력 극대화" },
   { icon: Target, label: "능력 확장", desc: "단순 영어교육뿐만 아니라 발표, 협상, 마케팅까지 확장" },
   { icon: Handshake, label: "네트워킹", desc: "네트워킹을 통한 국제 파트너와의 관계 형성" },
@@ -92,469 +92,161 @@ const textbooks = [
 
 export function TesolCoursePage() {
   return (
-    <div className="pb-24">
-      <CourseSubNav />
+    <div>
       <QuickNav />
       <MobileQuickNav />
-      {/* Hero */}
-      <section className="relative min-h-[420px] lg:min-h-[500px] flex items-center">
-        <div className="absolute inset-0">
-          <ImageWithFallback src={heroImg} alt="TESOL" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-black/40" />
-        </div>
-        <div className="relative max-w-[1200px] mx-auto px-6 py-20 w-full">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-            <div className="bg-[#1a1a2e]/80 backdrop-blur-sm p-8 lg:p-12 max-w-xl">
-              <span className="text-[#e8a0a0] text-[12px] tracking-[0.2em] uppercase mb-4 block" style={{ fontWeight: 600 }}>
-                TESOL Program
-              </span>
-              <h1 className="text-[26px] lg:text-[36px] text-white mb-4" style={{ fontWeight: 700, lineHeight: 1.3 }}>
-                당신의 영어, 이제는
-                교실을 넘어 세계 무대로
-              </h1>
-              <div className="flex flex-wrap gap-3 text-white/70 text-[14px] mb-6">
-                <span className="flex items-center gap-1.5">
-                  <CheckCircle className="w-4 h-4 text-[#e8a0a0]" />
-                  8주 만에 국제 TESOL 자격 취득
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <CheckCircle className="w-4 h-4 text-[#e8a0a0]" />
-                  20년 전통, 3만명 졸업생
-                </span>
-              </div>
-              <Link
-                to="/admission"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-[#8B1A2B] text-white text-[14px] hover:bg-[#6d1422] transition-colors"
-                style={{ fontWeight: 600 }}
-              >
-                수강 신청하기 <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
-          </motion.div>
-          {/* Quick Nav Bar - Position 3 */}
-          <div className="mt-12 hidden md:block">
-            <CourseMenuBar />
-          </div>
-        </div>
-      </section>
 
-      {/* What is TESOL */}
-      <section className="py-20">
-        <div className="max-w-[1200px] mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-14 items-center">
-            <div>
-              <span className="text-[#8B1A2B] text-[12px] tracking-[0.2em] uppercase mb-5 block" style={{ fontWeight: 600 }}>
-                About TESOL
-              </span>
-              <h2 className="text-[26px] lg:text-[32px] text-[#1a1a2e] mb-5" style={{ fontWeight: 800, lineHeight: 1.35 }}>
-                TESOL 교육이란?
-              </h2>
-              <p className="text-gray-600 text-[15px] mb-6" style={{ lineHeight: 1.9 }}>
-                TESOL(Teaching English to Speakers of Other Languages)은 국제적으로 공인된 영어교사 자격증으로,
-                단순히 영어 교육에 머무르지 않습니다.
-              </p>
-              <p className="text-gray-600 text-[15px] mb-6" style={{ lineHeight: 1.9 }}>
-                타임스 TESOL은 읽기·쓰기·듣기·말하기 네 가지 핵심 영어 스킬을 기반으로, 교실 수업을 넘어
-                회의·프레젠테이션·영업·마케팅·협상 등 실제 글로벌 현장에서 바로 활용할 수 있는 실무형 커뮤니케이션 능력을 길러줍니다.
-              </p>
-              <div className="bg-red-50 p-5 border-l-4 border-[#8B1A2B]">
-                <p className="text-[#8B1A2B] text-[15px]" style={{ fontWeight: 700 }}>
-                  TESOL 없는 영어교사, 이제 경쟁력이 없습니다.
-                </p>
-              </div>
-            </div>
-            <div className="grid grid-cols-2 gap-4">
-              {highlights.map((h, i) => {
-                const Icon = h.icon;
-                return (
-                  <motion.div
-                    key={h.label}
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.1 }}
-                    className="bg-white p-5 border border-gray-100 hover:shadow-md transition-shadow"
-                  >
-                    <div className="w-11 h-11 bg-red-50 rounded-full flex items-center justify-center mb-3">
-                      <Icon className="w-5 h-5 text-[#8B1A2B]" />
-                    </div>
-                    <h4 className="text-[14px] text-[#1a1a2e] mb-1" style={{ fontWeight: 700 }}>{h.label}</h4>
-                    <p className="text-[12px] text-gray-500" style={{ lineHeight: 1.5 }}>{h.desc}</p>
-                  </motion.div>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Core Design */}
-      <CoreDesign courseName="TESOL" />
-
-      {/* History & Achievements */}
-      <section className="py-20">
-        <div className="max-w-[1200px] mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-12">
-            <div>
-              <h3 className="text-[22px] text-[#1a1a2e] mb-6" style={{ fontWeight: 800 }}>
-                타임스 TESOL의 역사와 성과
-              </h3>
-              <div className="space-y-4">
-                {[
-                  "2001년부터 전국 명문대와 함께 TESOL 과정 운영",
-                  "국내·해외 통틀어 최다 3만 명 이상의 TESOL 졸업생 배출",
-                  "민간자격증 등록완료, 국제적으로 활용가능한 공신력 있는 자격",
-                  "해외 교육 기관 및 글로벌 기업 취업·진출자 다수 배출",
-                ].map((item, i) => (
-                  <div key={i} className="flex items-start gap-3">
-                    <CheckCircle className="w-5 h-5 text-[#8B1A2B] mt-0.5 shrink-0" />
-                    <span className="text-gray-700 text-[14px]" style={{ lineHeight: 1.6 }}>{item}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div>
-              <h3 className="text-[22px] text-[#1a1a2e] mb-6" style={{ fontWeight: 800 }}>
-                교실을 넘어 세계 무대로
-              </h3>
-              <div className="space-y-4">
-                {[
-                  "TESOL 교육에 비즈니스·프레젠테이션·협상 스킬을 결합해 실무 확장",
-                  "영어 교육뿐 아니라 다언어 교육 과정으로 확대 운영",
-                  "해외 대학·국제기구와 TESOL 상호 인증 네트워크 강화",
-                  "온라인·오프라인 융합 교육으로 세계 어디서나 수강 가능한 시스템 구축",
-                  "졸업생 네트워크를 통한 평생 경력·취업 지원 플랫폼 완성",
-                ].map((item, i) => (
-                  <div key={i} className="flex items-start gap-3">
-                    <Star className="w-5 h-5 text-[#c19a3e] mt-0.5 shrink-0" />
-                    <span className="text-gray-700 text-[14px]" style={{ lineHeight: 1.6 }}>{item}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Strengths */}
-      <section className="py-20 bg-[#1a1a2e]">
-        <div className="max-w-[1200px] mx-auto px-6">
-          <div className="text-center mb-14">
-            <span className="text-[#e8a0a0] text-[12px] tracking-[0.2em] uppercase mb-4 block" style={{ fontWeight: 600 }}>
-              Strengths
-            </span>
-            <h2 className="text-[28px] lg:text-[36px] text-white" style={{ fontWeight: 800 }}>
-              타임스 TESOL의 강점
-            </h2>
-          </div>
-          <div className="grid md:grid-cols-2 gap-6">
-            {strengths.map((s, i) => {
-              const Icon = s.icon;
-              return (
-                <motion.div
-                  key={s.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
-                  className="bg-white/5 backdrop-blur-sm p-7 border border-white/10 hover:border-white/20 transition-all"
-                >
-                  <div className="w-12 h-12 bg-[#8B1A2B] rounded-full flex items-center justify-center mb-4">
-                    <Icon className="w-6 h-6 text-white" />
-                  </div>
-                  <h3 className="text-white text-[18px] mb-1" style={{ fontWeight: 700 }}>
-                    {s.title}
-                  </h3>
-                  <p className="text-[#e8a0a0] text-[14px] mb-3" style={{ fontWeight: 500 }}>
-                    {s.subtitle}
-                  </p>
-                  <p className="text-white/50 text-[14px]" style={{ lineHeight: 1.7 }}>
-                    {s.desc}
-                  </p>
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Curriculum */}
-      <section className="py-20">
-        <div className="max-w-[1200px] mx-auto px-6">
-          <div className="flex items-center gap-3 mb-10">
-            <div className="w-1.5 h-8 bg-[#8B1A2B]" />
-            <h3 className="text-[24px] lg:text-[28px] text-[#1a1a2e]" style={{ fontWeight: 800 }}>
-              세부 커리큘럼 (8주 과정)
-            </h3>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-24">
-            {curriculum.map((item, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.05 }}
-                className="bg-white p-6 border border-gray-100 hover:border-[#8B1A2B] transition-all group shadow-sm flex flex-col items-center text-center rounded-xl"
-              >
-                <div className="w-12 h-12 bg-red-50 rounded-full flex items-center justify-center mb-4 group-hover:bg-[#8B1A2B] transition-colors">
-                  <span className="text-[#8B1A2B] text-[13px] group-hover:text-white font-black">W{i + 1}</span>
-                </div>
-                <h4 className="text-[15px] text-[#1a1a2e] font-black mb-2">{item.week}</h4>
-                <p className="text-gray-500 text-[13px] font-medium leading-relaxed">{item.content}</p>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Detailed Modules */}
-          <div>
-            <div className="flex items-center gap-3 mb-10">
-              <div className="w-1.5 h-8 bg-[#8B1A2B]" />
-              <h3 className="text-[24px] lg:text-[28px] text-[#1a1a2e]" style={{ fontWeight: 800 }}>
-                TESOL 120시간 상세 커리큘럼
-              </h3>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {[
-                {
-                  id: "01",
-                  title: "모듈 1 – 교수법 입문",
-                  items: ["제2언어 습득 단계", "교실 상황 관리", "교사 유형 분석", "학급 경영 기법", "학습자 레벨 분석"]
-                },
-                {
-                  id: "02",
-                  title: "모듈 2 – 수업 준비",
-                  items: ["아이스브레이킹 설계", "시각 자료 활용법", "수업 계획안(Lesson Plan)"]
-                },
-                {
-                  id: "03",
-                  title: "모듈 3 – 발음 지도법",
-                  items: ["발음 영향 요인", "자음/모음 지도 실습", "강세/리듬/억양"]
-                },
-                {
-                  id: "04",
-                  title: "모듈 4 – 리스닝 지도법",
-                  items: ["실생활 리스닝 구성", "학습 문제 및 해결책", "이해력 향상 활동"]
-                },
-                {
-                  id: "05",
-                  title: "모듈 5 – 리딩 지도법",
-                  items: ["텍스트 선정 기준", "독해 단계별 지도", "어휘 확장 전략"]
-                },
-                {
-                  id: "06",
-                  title: "모듈 6 – 스피킹 지도법",
-                  items: ["토론 수업 목표 설정", "롤플레이 시나리오", "오류 교정 및 피드백"]
-                },
-                {
-                  id: "07",
-                  title: "모듈 7 – 문법 지도법",
-                  items: ["연역적/귀납적 접근", "문법 시각적 제시", "단계별 학습 활동"]
-                },
-                {
-                  id: "08",
-                  title: "모듈 8 – 라이팅 지도법",
-                  items: ["쓰기 교육 목적", "문어 오류 교정", "창의적 글쓰기 설계"]
-                }
-              ].map((m, i) => (
-                <motion.div
-                  key={m.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.05 }}
-                  className="bg-gray-50/50 border border-gray-100 p-6 rounded-2xl hover:shadow-sm transition-all group"
-                >
-                  <div className="flex items-center gap-3 mb-4">
-                    <span className="text-[18px] font-black text-[#8B1A2B] opacity-30">
-                      {m.id}
-                    </span>
-                    <h4 className="text-[14px] text-[#1a1a2e] font-black leading-tight">
-                      {m.title}
-                    </h4>
-                  </div>
-                  <div className="space-y-1.5">
-                    {m.items.map((item, idx) => (
-                      <div key={idx} className="flex items-start gap-2">
-                        <div className="w-1 h-1 bg-gray-300 rounded-full mt-2 shrink-0" />
-                        <span className="text-gray-500 text-[12px]">{item}</span>
-                      </div>
-                    ))}
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Certificates */}
-      <section className="py-24 bg-[#faf8f6]">
-        <div className="max-w-[1200px] mx-auto px-6">
-          <div className="text-center mb-16">
-            <span className="text-[#8B1A2B] text-[12px] tracking-[0.2em] uppercase mb-4 block font-bold">
-              Official Certificates
-            </span>
-            <h2 className="text-[28px] lg:text-[36px] text-[#1a1a2e] font-black">
-              수료 및 자격 인증
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-end">
-            {[
-              { img: cert1, title: "방과후영어지도사" },
-              { img: cert2, title: "테솔지도사" },
-              { img: cert3, title: "TESOL 자격증" }
-            ].map((item, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1, duration: 0.6 }}
-                className="flex flex-col w-full"
-              >
-                <div className="text-center mb-4">
-                  <span className="text-[15px] text-[#8B1A2B] font-black tracking-tight">
-                    {item.title}
-                  </span>
-                </div>
-                <div className="bg-white p-3 border border-gray-100 shadow-lg rounded-xl hover:shadow-2xl transition-all group flex flex-col items-center">
-                  <div className="aspect-[4/5.4] w-full overflow-hidden bg-white flex items-center justify-center p-2">
-                    <ImageWithFallback 
-                      src={item.img} 
-                      alt={item.title} 
-                      className="w-full h-full object-contain group-hover:scale-[1.02] transition-transform duration-500" 
-                    />
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Career Paths */}
-          <div className="mt-24">
-            <div className="text-center mb-12">
-              <span className="text-[#8B1A2B] text-[12px] tracking-[0.2em] uppercase mb-3 block font-bold">Career</span>
-              <h3 className="text-[24px] text-[#1a1a2e] font-black">자격증 활용처</h3>
-            </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {[
-                { icon: Briefcase, title: "국내 취업", desc: "초/중/고 방과후 강사,\n대형 어학원 및 공부방" },
-                { icon: Globe, title: "해외 취업", desc: "영미권 본토 교육기관,\n동남아 국제학교 취업" },
-                { icon: Presentation, title: "교육 포트폴리오", desc: "비교과 활동, 입시/취업\n자신만의 강점 지표" },
-                { icon: Award, title: "자격 점수", desc: "공공기관 가산점,\n전문직 자격 인증 지원" }
-              ].map((item, i) => (
-                <div key={i} className="bg-white p-8 border border-gray-100 rounded-xl text-center group hover:border-[#8B1A2B] transition-all">
-                  <div className="w-14 h-14 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-5 group-hover:bg-[#8B1A2B] transition-colors">
-                    <item.icon className="w-6 h-6 text-[#8B1A2B] group-hover:text-white" />
-                  </div>
-                  <h4 className="text-[16px] text-[#1a1a2e] font-extrabold mb-3">{item.title}</h4>
-                  <p className="text-gray-500 text-[13px] leading-relaxed whitespace-pre-line">{item.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Textbooks */}
-      <section className="py-20 bg-[#faf8f6]">
-        <div className="max-w-[1200px] mx-auto px-6">
-          <div className="text-center mb-14">
-            <span className="text-[#8B1A2B] text-[12px] tracking-[0.2em] uppercase mb-4 block" style={{ fontWeight: 600 }}>
-              Materials
-            </span>
-            <h2 className="text-[28px] lg:text-[36px] text-[#1a1a2e]" style={{ fontWeight: 800 }}>
-              교재 안내
-            </h2>
-          </div>
-          <div className="grid md:grid-cols-3 gap-8">
-            {textbooks.map((book) => (
-              <motion.div
-                key={book.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="bg-white p-8 border border-gray-100 shadow-sm hover:shadow-md transition-shadow flex flex-col items-center text-center"
-              >
-                <div className="w-full aspect-[3/4] mb-6 overflow-hidden bg-gray-50 flex items-center justify-center">
-                  <ImageWithFallback
-                    src={book.image}
-                    alt={book.title}
-                    className="w-full h-full object-contain p-2"
-                  />
-                </div>
-                <h4 className="text-[16px] text-[#1a1a2e] leading-tight" style={{ fontWeight: 700 }}>
-                  {book.title}
-                </h4>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Outcomes */}
-      <section className="py-20 bg-[#1a1a2e]">
-        <div className="max-w-[1200px] mx-auto px-6">
-          <div className="text-center mb-14">
-            <h2 className="text-[26px] lg:text-[32px] text-white mb-3" style={{ fontWeight: 800 }}>
-              영어 실력 그 이상, 세계를 이끄는 리더로
-            </h2>
-            <p className="text-white/50 text-[15px]">
-              단순한 영어 실력이 아닌, "영어로 가르치고 이끄는 진짜 리더십"을 갖춘 전문가가 됩니다.
+      {/* Hero match theme-bg of course detail or simple page-header */}
+      <div className="theme-bg">
+        <div className="container relative z-10">
+          <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+            <span className="course-badge mb-4" style={{display: 'inline-block', background: 'rgba(255,255,255,0.1)', color: 'white', border: '1px solid rgba(255,255,255,0.2)'}}>모집중</span>
+            <h1 className="theme-title mb-4">TESOL 교육 과정</h1>
+            <p className="text-lg opacity-80" style={{maxWidth: '1000px', margin: '0 auto'}}>
+              당신의 영어, 이제는 교실을 넘어 세계 무대로 나아갈 시간입니다.<br/>
+              8주 집중 훈련으로 완성하는 국제 공인 영어교사 커리어.
             </p>
-          </div>
-          <div className="grid grid-cols-2 lg:grid-cols-5 gap-5">
-            {outcomes.map((o, i) => {
-              const Icon = o.icon;
-              return (
-                <motion.div
-                  key={o.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.08 }}
-                  className="bg-white/5 backdrop-blur-sm p-5 border border-white/10 text-center hover:bg-white/10 transition-colors"
-                >
-                  <div className="w-12 h-12 mx-auto bg-[#8B1A2B]/30 rounded-full flex items-center justify-center mb-4">
-                    <Icon className="w-6 h-6 text-[#e8a0a0]" />
-                  </div>
-                  <h4 className="text-white text-[14px] mb-2" style={{ fontWeight: 700 }}>{o.title}</h4>
-                  <p className="text-white/40 text-[12px]" style={{ lineHeight: 1.5 }}>{o.desc}</p>
-                </motion.div>
-              );
-            })}
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </div>
 
-      {/* Final CTA */}
-      <section className="py-16 bg-[#8B1A2B]">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-white text-[26px] lg:text-[32px] mb-3" style={{ fontWeight: 800 }}>
-            8주 후, 당신은 글로벌 리더입니다
-          </h2>
-          <p className="text-white/70 text-[15px] mb-8">
-            국제 TESOL 자격증과 함께 세계 무대로 나가세요
-          </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Link
-              to="/admission"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-white text-[#8B1A2B] text-[16px] hover:bg-gray-100 transition"
-              style={{ fontWeight: 700 }}
-            >
-              수강 신청하기 <ArrowRight className="w-5 h-5" />
-            </Link>
-            <Link
-              to="/contact"
-              className="inline-flex items-center gap-2 px-8 py-4 border-2 border-white/30 text-white text-[16px] hover:bg-white/10 transition"
-              style={{ fontWeight: 600 }}
-            >
-              상담 문의
-            </Link>
+      {/* Sticky Menu Bar */}
+      <div className="sticky top-[72px] z-30 shadow-sm">
+        <CourseMenuBar />
+      </div>
+
+      <div className="container py-20 course-detail animate-fade-in">
+        
+        {/* Course Header equivalent */}
+        <div className="course-header flex items-center justify-between mb-8">
+          <h2 className="course-title text-2xl font-bold">과정 상세 정보</h2>
+          <span className="course-badge">정규과정</span>
+        </div>
+
+        <div className="course-info-grid card mb-12">
+          <div className="course-image">
+            <ImageWithFallback src={heroImg} alt="TESOL 과정" className="w-full h-full object-cover" />
+          </div>
+          <ul className="course-info-list" style={{display: 'flex', flexDirection: 'column'}}>
+            <li>
+              <span className="label">과정구분</span>
+              <span className="value">국제 TESOL 커리큘럼</span>
+            </li>
+            <li>
+              <span className="label">교육기간</span>
+              <span className="value">8주 완성 (120시간)</span>
+            </li>
+            <li>
+              <span className="label">수업방식</span>
+              <span className="value">100% 영어 원어민 집중 수업</span>
+            </li>
+            <li>
+              <span className="label">자격인증</span>
+              <span className="value">수료증 및 국제 자격증 발급</span>
+            </li>
+            <li className="mt-6 border-none pb-0">
+              <Link to="/admission" className="btn-primary w-full text-center" style={{width: '100%'}}>
+                수강신청 바로가기
+              </Link>
+            </li>
+          </ul>
+        </div>
+
+        <div className="course-section mb-12">
+          <h3 className="section-title">과정소개</h3>
+          <div className="rich-text card p-8">
+            <div className="mb-8">
+              <p className="font-bold text-lg text-primary mb-2">TESOL 교육이란 무엇인가요?</p>
+              <p className="leading-relaxed mb-4">TESOL(Teaching English to Speakers of Other Languages)은 영어를 모국어로 하지 않는 사람들에게 영어를 가르치는 국제 공인 영어교사 양성 과정입니다.</p>
+              <p className="leading-relaxed">타임스 TESOL은 단순히 이론에 그치지 않고, 100% 원어민 수업을 통해 실제 교실 상황에서 필요한 교수법과 커뮤니케이션 스킬을 체득하는 실전 중심의 교육을 지향합니다.</p>
+            </div>
           </div>
         </div>
-      </section>
+
+        <div className="course-section mb-12">
+          <h3 className="section-title">타임스 TESOL의 특별함</h3>
+          <div className="rich-text card p-8">
+             <ul className="bullet-list">
+                <li>8주 집중 몰입 - 120시간 핵심 교육으로 빠른 자격 취득</li>
+                <li>실무 프레젠테이션 - 수업 시연 및 발표 중심의 실습 교육</li>
+                <li>글로벌 네트워크 - 전 세계 교육기관에서 통용되는 자격</li>
+                <li>방과후지도사 연계 - 추가 자격증 취득 및 취업 지원</li>
+             </ul>
+          </div>
+        </div>
+
+        <div className="course-section mb-12">
+          <h3 className="section-title">타임스 TESOL의 강점</h3>
+          <div className="flow-grid pb-2">
+            {strengths.map((s, idx) => (
+              <div key={idx} className="card flow-card p-6 border border-gray-200" style={{background: '#fafafa', display: 'flex', flexDirection: 'column'}}>
+                <span className="flow-step text-primary font-bold mb-2 text-sm">{s.subtitle}</span>
+                <h4 className="flow-title font-bold text-lg mb-2">{s.title}</h4>
+                <p className="flow-content text-muted text-sm leading-relaxed">{s.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="course-section mb-12">
+          <h3 className="section-title">수료 후 진로 및 목표</h3>
+          <div className="flow-grid">
+            {outcomes.map((o, idx) => (
+              <div key={idx} className="card flow-card p-6 border border-gray-200" style={{background: '#fafafa', display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center'}}>
+                <div className="w-12 h-12 rounded-full bg-red-50 flex items-center justify-center mb-4">
+                   <o.icon className="w-6 h-6 text-primary" />
+                </div>
+                <h4 className="flow-title font-bold text-[15px] mb-2 w-full">{o.title}</h4>
+                <p className="flow-content text-muted text-[13px] leading-relaxed w-full">{o.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="course-section mb-12">
+          <h3 className="section-title">주차별 커리큘럼</h3>
+          <div className="table-wrap">
+            <table className="schedule-table m-0">
+              <thead>
+                <tr>
+                  <th style={{ width: '20%', textAlign: 'center' }}>주차</th>
+                  <th style={{ width: '80%' }}>교육내용</th>
+                </tr>
+              </thead>
+              <tbody>
+                {curriculum.map((item, idx) => (
+                  <tr key={idx}>
+                    <td className="text-center font-bold text-main">{item.week}</td>
+                    <td className="text-muted">{item.content}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div className="course-section mb-12">
+          <h3 className="section-title">교재 안내</h3>
+          <div className="grid col-3 gap-6" style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '24px'}}>
+            {textbooks.map((book) => (
+              <div key={book.title} className="card p-6 flex flex-col items-center text-center shadow-sm">
+                <div className="w-full aspect-[3/4] mb-4 flex items-center justify-center">
+                  <ImageWithFallback src={book.image} alt={book.title} className="w-full object-contain" />
+                </div>
+                <h4 className="font-bold text-sm text-main">{book.title}</h4>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="course-section mb-12">
+          <h3 className="section-title">수료 및 자격 인증</h3>
+          <div className="card bg-[var(--bg-secondary)] border border-[var(--border)] p-6 rounded-xl">
+             <p className="text-[var(--text-muted)] leading-relaxed">자격증 수료 시 전 세계 교육기관에서 통용되는 국제 TESOL 교육 수료증, 테솔지도사, 방과후영어지도사 등 관련 자격증들의 추가 발급 기회가 주어집니다.</p>
+          </div>
+        </div>
+
+      </div>
     </div>
   );
 }

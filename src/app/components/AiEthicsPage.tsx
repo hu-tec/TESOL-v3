@@ -1,21 +1,20 @@
 import { Link } from "react-router";
 import { motion } from "motion/react";
+import { QuickNav, MobileQuickNav, CourseMenuBar } from "./QuickNav";
+import { ImageWithFallback } from "./figma/ImageWithFallback";
 import {
   ArrowRight,
   ShieldCheck,
   Zap,
   Award,
   Users,
-  CheckCircle,
   Briefcase,
   Target,
   Scale,
   Lock,
-  MessageSquare
+  MessageSquare,
+  ChevronRight
 } from "lucide-react";
-import { ImageWithFallback } from "./figma/ImageWithFallback";
-import { QuickNav, MobileQuickNav, CourseSubNav, CourseMenuBar } from "./QuickNav";
-import { CoreDesign } from "./CourseCommon";
 
 const heroImg = "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhYSUyMGV0aGljc3xlbnwwfHx8fDE3NzE3OTA0NTh8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral";
 
@@ -24,7 +23,7 @@ const strengths = [
     icon: Scale, 
     title: "ETHICAL LITERACY", 
     subtitle: "AI 윤리적 사고 배양", 
-    desc: "AI 기술의 파급력과 잠재적 위험을 인지하고, 공정성, 책임성, 투명성을 바탕으로 한 윤리적 판단 능력을 배양합니다." 
+    desc: "AI 기술의 파격적 위험을 인지하고, 공정성, 책임성, 투명성을 바탕으로 한 윤리적 판단 능력을 배양합니다." 
   },
   { 
     icon: Lock, 
@@ -66,191 +65,124 @@ const highlights = [
 
 export function AiEthicsPage() {
   return (
-    <div className="pb-24">
-      <CourseSubNav />
+    <div>
       <QuickNav />
       <MobileQuickNav />
 
-      {/* Hero */}
-      <section className="relative min-h-[420px] lg:min-h-[500px] flex items-center">
-        <div className="absolute inset-0">
-          <ImageWithFallback src={heroImg} alt="AI Ethics" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-black/40" />
-        </div>
-        <div className="relative max-w-[1200px] mx-auto px-6 py-20 w-full">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-            <div className="bg-[#1a1a2e]/80 backdrop-blur-sm p-8 lg:p-12 max-w-xl border-l-4 border-[#8B1A2B]">
-              <span className="text-[#e8a0a0] text-[12px] tracking-[0.2em] uppercase mb-4 block" style={{ fontWeight: 600 }}>
-                Responsible Technology
-              </span>
-              <h1 className="text-[26px] lg:text-[36px] text-white mb-4" style={{ fontWeight: 700, lineHeight: 1.3 }}>
-                AI 윤리 교육이란?
-              </h1>
-              <div className="flex flex-wrap gap-3 text-white/70 text-[14px] mb-6">
-                <span className="flex items-center gap-1.5">
-                  <CheckCircle className="w-4 h-4 text-[#e8a0a0]" />
-                  지능정보사회의 필수 역량
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <CheckCircle className="w-4 h-4 text-[#e8a0a0]" />
-                  신뢰할 수 있는 기술의 토대
-                </span>
-              </div>
-              <Link
-                to="/admission"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-[#8B1A2B] text-white text-[14px] hover:bg-[#6d1422] transition-colors"
-                style={{ fontWeight: 600 }}
-              >
-                수강 신청하기 <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
+      {/* Hero Section */}
+      <div className="theme-bg">
+        <div className="container relative z-10">
+          <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+            <span className="course-badge mb-4" style={{display: 'inline-block', background: 'rgba(255,255,255,0.1)', color: 'white', border: '1px solid rgba(255,255,255,0.2)'}}>모집중</span>
+            <h1 className="theme-title mb-4">AI 윤리 전문가 과정</h1>
+            <p className="text-lg opacity-80" style={{maxWidth: '1000px', margin: '0 auto'}}>
+              기술의 진보만큼 가치관의 성숙이 중요합니다.<br/>
+              AI 시대에 인간의 존엄과 가치를 지키는 조화로운 발전 방향을 제시합니다.
+            </p>
           </motion.div>
-          <div className="mt-12 hidden md:block">
-            <CourseMenuBar />
+        </div>
+      </div>
+
+      {/* Sticky Menu Bar */}
+      <div className="sticky top-[72px] z-30 shadow-sm">
+        <CourseMenuBar />
+      </div>
+
+      <div className="container py-20 course-detail animate-fade-in">
+        
+        {/* Course Header */}
+        <div className="course-header flex items-center justify-between mb-8">
+          <h2 className="course-title text-2xl font-bold">과정 상세 정보</h2>
+          <span className="course-badge">정규과정</span>
+        </div>
+
+        <div className="course-info-grid card mb-12">
+          <div className="course-image">
+            <ImageWithFallback src={heroImg} alt="AI 윤리 과정" className="w-full h-full object-cover" />
+          </div>
+          <ul className="course-info-list" style={{display: 'flex', flexDirection: 'column'}}>
+            <li>
+              <span className="label">과정구분</span>
+              <span className="value">AI 윤리 전문가 과정</span>
+            </li>
+            <li>
+              <span className="label">교육기간</span>
+              <span className="value">8주 완성</span>
+            </li>
+            <li>
+              <span className="label">교육대상</span>
+              <span className="value">기업 임직원, 교육 기획자, 개발자</span>
+            </li>
+            <li>
+              <span className="label">자격인증</span>
+              <span className="value">AI 윤리 전문가 자격 (예정)</span>
+            </li>
+            <li className="mt-6 border-none pb-0">
+              <Link to="/admission" className="btn-primary w-full text-center" style={{width: '100%'}}>
+                수강신청 바로가기
+              </Link>
+            </li>
+          </ul>
+        </div>
+
+        <div className="course-section mb-12">
+          <h3 className="section-title">과정소개</h3>
+          <div className="rich-text card p-8">
+            <div className="mb-8">
+              <p className="font-bold text-lg text-primary mb-2">AI 윤리 교육이란 무엇인가요?</p>
+              <p className="leading-relaxed mb-4">AI 기술이 우리 삶의 모든 영역에 깊숙이 들어오면서, 기술적 성능만큼이나 '질서 있는 사용'이 중요해졌습니다. 원칙 없는 AI 기술은 사회적 불신을 초래하고 기업에 치명적인 리스크를 줄 수 있습니다.</p>
+              <p className="leading-relaxed">타임스 AI 윤리 과정은 단순히 '하지 마라'는 법을 배우는 것을 넘어, AI 시대에 인간의 존엄과 가치를 지키며 조화롭게 발전할 수 있는 방향을 제시합니다.</p>
+            </div>
           </div>
         </div>
-      </section>
 
-      {/* Intro */}
-      <section className="py-20">
-        <div className="max-w-[1200px] mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-14 items-center">
-            <div>
-              <span className="text-[#8B1A2B] text-[12px] tracking-[0.2em] uppercase mb-5 block" style={{ fontWeight: 600 }}>
-                Human-Centered AI
-              </span>
-              <h2 className="text-[26px] lg:text-[32px] text-[#1a1a2e] mb-5" style={{ fontWeight: 800, lineHeight: 1.35 }}>
-                AI 윤리 교육의 필요성
-              </h2>
-              <p className="text-gray-600 text-[15px] mb-6" style={{ lineHeight: 1.9 }}>
-                AI 기술이 우리 삶의 모든 영역에 깊숙이 들어오면서, 기술적 성능만큼이나 '질서 있는 사용'이 
-                중요해졌습니다. 원칙 없는 AI 기술은 사회적 불신을 초래하고 기업에 치명적인 리스크를 줄 수 있습니다.
-              </p>
-              <p className="text-gray-600 text-[15px] mb-6" style={{ lineHeight: 1.9 }}>
-                타임스 AI 윤리 과정은 단순히 '하지 마라'는 법을 배우는 것을 넘어, AI 시대에 인간의 존엄과 가치를 
-                지키며 조화롭게 발전할 수 있는 방향을 제시합니다.
-              </p>
-              <div className="bg-red-50 p-5 border-l-4 border-[#8B1A2B]">
-                <p className="text-[#8B1A2B] text-[15px]" style={{ fontWeight: 700 }}>
-                  기술의 진보만큼 가치관의 성숙이 중요합니다.
-                </p>
+        <div className="course-section mb-12">
+          <h3 className="section-title">학습 특징</h3>
+          <div className="rich-text card p-8">
+             <ul className="bullet-list">
+               {highlights.map((h, i) => (
+                  <li key={i}>{h.label} - {h.desc}</li>
+               ))}
+             </ul>
+          </div>
+        </div>
+
+        <div className="course-section mb-12">
+          <h3 className="section-title">강점 및 효과</h3>
+          <div className="flow-grid pb-2">
+            {strengths.map((s, idx) => (
+              <div key={idx} className="card flow-card p-6 border border-gray-200" style={{background: '#fafafa', display: 'flex', flexDirection: 'column'}}>
+                <span className="flow-step text-primary font-bold mb-2 text-sm">{s.subtitle}</span>
+                <h4 className="flow-title font-bold text-lg mb-2">{s.title}</h4>
+                <p className="flow-content text-muted text-sm leading-relaxed">{s.desc}</p>
               </div>
-            </div>
-            <div className="grid grid-cols-2 gap-4">
-              {highlights.map((h, i) => {
-                const Icon = h.icon;
-                return (
-                  <motion.div
-                    key={h.label}
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.1 }}
-                    className="bg-white p-6 border border-gray-100 hover:shadow-md transition-shadow flex flex-col items-start"
-                  >
-                    <div className="w-10 h-10 bg-red-50 rounded-full flex items-center justify-center mb-4">
-                      <Icon className="w-5 h-5 text-[#8B1A2B]" />
-                    </div>
-                    <h4 className="text-[14px] text-[#1a1a2e] mb-1.5" style={{ fontWeight: 700 }}>{h.label}</h4>
-                    <p className="text-[12px] text-gray-500 leading-relaxed">{h.desc}</p>
-                  </motion.div>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <CoreDesign courseName="AI 윤리" />
-
-      {/* Strengths */}
-      <section className="py-24 bg-[#1a1a2e]">
-        <div className="max-w-[1200px] mx-auto px-6">
-          <div className="text-center mb-16">
-            <span className="text-[#e8a0a0] text-[12px] tracking-[0.2em] uppercase mb-4 block" style={{ fontWeight: 600 }}>
-              Strengths
-            </span>
-            <h2 className="text-[28px] lg:text-[36px] text-white" style={{ fontWeight: 800 }}>
-              AI 윤리 교육의 핵심
-            </h2>
-          </div>
-          <div className="grid md:grid-cols-2 gap-6">
-            {strengths.map((s, i) => {
-              const Icon = s.icon;
-              return (
-                <motion.div
-                  key={s.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
-                  className="bg-[#1f1f3a] p-10 border border-white/5 hover:border-[#8B1A2B]/50 transition-all group"
-                >
-                  <div className="w-14 h-14 bg-[#8B1A2B] rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                    <Icon className="w-7 h-7 text-white" />
-                  </div>
-                  <h3 className="text-white text-[16px] mb-1 font-black tracking-tight">{s.title}</h3>
-                  <p className="text-[#e8a0a0] text-[13px] mb-4 font-bold">{s.subtitle}</p>
-                  <p className="text-white/40 text-[14px] leading-relaxed">{s.desc}</p>
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Curriculum */}
-      <section className="py-24 bg-white">
-        <div className="max-w-4xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <span className="text-[#8B1A2B] text-[12px] tracking-[0.2em] uppercase mb-4 block" style={{ fontWeight: 600 }}>
-              Curriculum
-            </span>
-            <h2 className="text-[28px] lg:text-[36px] text-[#1a1a2e]" style={{ fontWeight: 800 }}>
-              세부 커리큘럼
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {curriculum.map((item, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.05 }}
-                className="bg-white p-6 border border-gray-100 hover:border-[#8B1A2B] transition-all group shadow-sm flex flex-col items-center text-center rounded-xl"
-              >
-                <div className="w-12 h-12 bg-red-50 rounded-full flex items-center justify-center mb-4 group-hover:bg-[#8B1A2B] transition-colors">
-                  <span className="text-[#8B1A2B] text-[13px] group-hover:text-white font-black">W{i + 1}</span>
-                </div>
-                <h4 className="text-[15px] text-[#1a1a2e] font-black mb-2">{item.week}</h4>
-                <p className="text-gray-500 text-[13px] font-medium leading-relaxed">{item.content}</p>
-              </motion.div>
             ))}
           </div>
         </div>
-      </section>
 
-      {/* Final CTA */}
-      <section className="py-16 bg-[#8B1A2B]">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-white text-[26px] lg:text-[32px] mb-3" style={{ fontWeight: 800 }}>
-            올바른 AI 사용으로 내일을 준비하세요
-          </h2>
-          <p className="text-white/70 text-[15px] mb-8">
-            기술의 힘에 책임감을 더하는 가치 중심 교육
-          </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Link
-              to="/admission"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-white text-[#8B1A2B] text-[16px] hover:bg-gray-100 transition"
-              style={{ fontWeight: 700 }}
-            >
-              수강 신청하기 <ArrowRight className="w-5 h-5" />
-            </Link>
+        <div className="course-section mb-12">
+          <h3 className="section-title">주차별 커리큘럼</h3>
+          <div className="table-wrap">
+            <table className="schedule-table m-0">
+              <thead>
+                <tr>
+                  <th style={{ width: '20%', textAlign: 'center' }}>주차</th>
+                  <th style={{ width: '80%' }}>교육내용</th>
+                </tr>
+              </thead>
+              <tbody>
+                {curriculum.map((item, idx) => (
+                  <tr key={idx}>
+                    <td className="text-center font-bold text-main">{item.week}</td>
+                    <td className="text-muted">{item.content}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
-      </section>
+
+      </div>
     </div>
   );
 }

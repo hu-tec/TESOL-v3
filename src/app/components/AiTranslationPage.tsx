@@ -1,19 +1,17 @@
 import { Link } from "react-router";
 import { motion } from "motion/react";
+import { QuickNav, MobileQuickNav, CourseMenuBar } from "./QuickNav";
+import { ImageWithFallback } from "./figma/ImageWithFallback";
 import {
   ArrowRight,
   Zap,
   Award,
   Target,
   Globe,
-  CheckCircle,
   Cpu,
-  BookOpen,
-  Users
+  BookOpen
 } from "lucide-react";
-import { ImageWithFallback } from "./figma/ImageWithFallback";
-import { QuickNav, MobileQuickNav, CourseSubNav, CourseMenuBar } from "./QuickNav";
-import { CoreDesign } from "./CourseCommon";
+import { ChevronRight } from "lucide-react";
 
 const heroImg = "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlZHVjYXRpb24lMjB0ZWNobm9sb2d5fGVufDB8fHx8MTc3MTc5MDQ1OHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral";
 
@@ -64,191 +62,124 @@ const highlights = [
 
 export function AiTranslationPage() {
   return (
-    <div className="pb-24">
-      <CourseSubNav />
+    <div>
       <QuickNav />
       <MobileQuickNav />
 
-      {/* Hero */}
-      <section className="relative min-h-[420px] lg:min-h-[500px] flex items-center">
-        <div className="absolute inset-0">
-          <ImageWithFallback src={heroImg} alt="AI Translation" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-black/40" />
-        </div>
-        <div className="relative max-w-[1200px] mx-auto px-6 py-20 w-full">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-            <div className="bg-[#1a1a2e]/80 backdrop-blur-sm p-8 lg:p-12 max-w-xl border-l-4 border-[#8B1A2B]">
-              <span className="text-[#e8a0a0] text-[12px] tracking-[0.2em] uppercase mb-4 block" style={{ fontWeight: 600 }}>
-                Future of Translation
-              </span>
-              <h1 className="text-[26px] lg:text-[36px] text-white mb-4" style={{ fontWeight: 700, lineHeight: 1.3 }}>
-                AI 번역 교정 전문가란?
-              </h1>
-              <div className="flex flex-wrap gap-3 text-white/70 text-[14px] mb-6">
-                <span className="flex items-center gap-1.5">
-                  <CheckCircle className="w-4 h-4 text-[#e8a0a0]" />
-                  AI 시대의 새로운 전문 통번역사
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <CheckCircle className="w-4 h-4 text-[#e8a0a0]" />
-                  고부가가치 교정 기술 습득
-                </span>
-              </div>
-              <Link
-                to="/admission"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-[#8B1A2B] text-white text-[14px] hover:bg-[#6d1422] transition-colors"
-                style={{ fontWeight: 600 }}
-              >
-                수강 신청하기 <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
+      {/* Hero Section */}
+      <div className="theme-bg">
+        <div className="container relative z-10">
+          <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+            <span className="course-badge mb-4" style={{display: 'inline-block', background: 'rgba(255,255,255,0.1)', color: 'white', border: '1px solid rgba(255,255,255,0.2)'}}>모집중</span>
+            <h1 className="theme-title mb-4">AI 번역 교정 과정</h1>
+            <p className="text-lg opacity-80" style={{maxWidth: '1000px', margin: '0 auto'}}>
+              AI 기술과 전문 번역이 만나는 새로운 가능성.<br/>
+              단순 번역을 넘어 AI를 도구로 부리는 번역 전문가가 되십시오.
+            </p>
           </motion.div>
-          <div className="mt-12 hidden md:block">
-            <CourseMenuBar />
+        </div>
+      </div>
+
+      {/* Sticky Menu Bar */}
+      <div className="sticky top-[72px] z-30 shadow-sm">
+        <CourseMenuBar />
+      </div>
+
+      <div className="container py-20 course-detail animate-fade-in">
+        
+        {/* Course Header equivalent */}
+        <div className="course-header flex items-center justify-between mb-8">
+          <h2 className="course-title text-2xl font-bold">과정 상세 정보</h2>
+          <span className="course-badge">정규과정</span>
+        </div>
+
+        <div className="course-info-grid card mb-12">
+          <div className="course-image">
+            <ImageWithFallback src={heroImg} alt="AI 번역 과정" className="w-full h-full object-cover" />
+          </div>
+          <ul className="course-info-list" style={{display: 'flex', flexDirection: 'column'}}>
+            <li>
+              <span className="label">과정구분</span>
+              <span className="value">AI 번역 교정 전문가</span>
+            </li>
+            <li>
+              <span className="label">교육기간</span>
+              <span className="value">8주 완성</span>
+            </li>
+            <li>
+              <span className="label">교육대상</span>
+              <span className="value">번역가 희망자 및 실무자</span>
+            </li>
+            <li>
+              <span className="label">자격인증</span>
+              <span className="value">ITT 자격증 및 수료증</span>
+            </li>
+            <li className="mt-6 border-none pb-0">
+              <Link to="/admission" className="btn-primary w-full text-center" style={{width: '100%'}}>
+                수강신청 바로가기
+              </Link>
+            </li>
+          </ul>
+        </div>
+
+        <div className="course-section mb-12">
+          <h3 className="section-title">과정소개</h3>
+          <div className="rich-text card p-8">
+            <div className="mb-8">
+              <p className="font-bold text-lg text-primary mb-2">AI 번역 교정 교육이란 무엇인가요?</p>
+              <p className="leading-relaxed mb-4">단순 번역을 넘어 AI가 산출한 결과물의 오류를 찾아내고 문맥을 완성하는 '포스트 에디팅' 능력은 이제 전문 번역사의 필수 역량입니다.</p>
+              <p className="leading-relaxed">타임스 AI 번역 교정 과정은 전문 분야별 지식과 AI 활용 능력을 결합하여 번역의 속도와 퀄리티를 동시에 잡는 진정한 미래형 번역 전문가를 양성합니다.</p>
+            </div>
           </div>
         </div>
-      </section>
 
-      {/* Intro */}
-      <section className="py-20">
-        <div className="max-w-[1200px] mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-14 items-center">
-            <div>
-              <span className="text-[#8B1A2B] text-[12px] tracking-[0.2em] uppercase mb-5 block" style={{ fontWeight: 600 }}>
-                AI Enhanced Translation
-              </span>
-              <h2 className="text-[26px] lg:text-[32px] text-[#1a1a2e] mb-5" style={{ fontWeight: 800, lineHeight: 1.35 }}>
-                AI 번역 교정 교육이란?
-              </h2>
-              <p className="text-gray-600 text-[15px] mb-6" style={{ lineHeight: 1.9 }}>
-                단순 번역을 넘어 AI가 산출한 결과물의 오류를 찾아내고 문맥을 완성하는 '포스트 에디팅' 능력은 
-                이제 전문 번역사의 필수 역량입니다.
-              </p>
-              <p className="text-gray-600 text-[15px] mb-6" style={{ lineHeight: 1.9 }}>
-                타임스 AI 번역 교정 과정은 전문 분야별 지식과 AI 활용 능력을 결합하여 
-                번역의 속도와 퀄리티를 동시에 잡는 진정한 미래형 번역 전문가를 양성합니다.
-              </p>
-              <div className="bg-red-50 p-5 border-l-4 border-[#8B1A2B]">
-                <p className="text-[#8B1A2B] text-[15px]" style={{ fontWeight: 700 }}>
-                  AI를 도구로 부리는 번역가가 되십시오.
-                </p>
+        <div className="course-section mb-12">
+          <h3 className="section-title">학습 특징</h3>
+          <div className="rich-text card p-8">
+             <ul className="bullet-list">
+               {highlights.map((h, i) => (
+                  <li key={i}>{h.label} - {h.desc}</li>
+               ))}
+             </ul>
+          </div>
+        </div>
+
+        <div className="course-section mb-12">
+          <h3 className="section-title">강점 및 효과</h3>
+          <div className="flow-grid pb-2">
+            {strengths.map((s, idx) => (
+              <div key={idx} className="card flow-card p-6 border border-gray-200" style={{background: '#fafafa', display: 'flex', flexDirection: 'column'}}>
+                <span className="flow-step text-primary font-bold mb-2 text-sm">{s.subtitle}</span>
+                <h4 className="flow-title font-bold text-lg mb-2">{s.title}</h4>
+                <p className="flow-content text-muted text-sm leading-relaxed">{s.desc}</p>
               </div>
-            </div>
-            <div className="grid grid-cols-2 gap-4">
-              {highlights.map((h, i) => {
-                const Icon = h.icon;
-                return (
-                  <motion.div
-                    key={h.label}
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.1 }}
-                    className="bg-white p-6 border border-gray-100 hover:shadow-md transition-shadow flex flex-col items-start"
-                  >
-                    <div className="w-10 h-10 bg-red-50 rounded-full flex items-center justify-center mb-4">
-                      <Icon className="w-5 h-5 text-[#8B1A2B]" />
-                    </div>
-                    <h4 className="text-[14px] text-[#1a1a2e] mb-1.5" style={{ fontWeight: 700 }}>{h.label}</h4>
-                    <p className="text-[12px] text-gray-500 leading-relaxed">{h.desc}</p>
-                  </motion.div>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <CoreDesign courseName="AI 번역" />
-
-      {/* Strengths */}
-      <section className="py-24 bg-[#1a1a2e]">
-        <div className="max-w-[1200px] mx-auto px-6">
-          <div className="text-center mb-16">
-            <span className="text-[#e8a0a0] text-[12px] tracking-[0.2em] uppercase mb-4 block" style={{ fontWeight: 600 }}>
-              Strengths
-            </span>
-            <h2 className="text-[28px] lg:text-[36px] text-white" style={{ fontWeight: 800 }}>
-              AI 번역 교육의 차별점
-            </h2>
-          </div>
-          <div className="grid md:grid-cols-2 gap-6">
-            {strengths.map((s, i) => {
-              const Icon = s.icon;
-              return (
-                <motion.div
-                  key={s.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
-                  className="bg-[#1f1f3a] p-10 border border-white/5 hover:border-[#8B1A2B]/50 transition-all group"
-                >
-                  <div className="w-14 h-14 bg-[#8B1A2B] rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                    <Icon className="w-7 h-7 text-white" />
-                  </div>
-                  <h3 className="text-white text-[16px] mb-1 font-black tracking-tight">{s.title}</h3>
-                  <p className="text-[#e8a0a0] text-[13px] mb-4 font-bold">{s.subtitle}</p>
-                  <p className="text-white/40 text-[14px] leading-relaxed">{s.desc}</p>
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Curriculum */}
-      <section className="py-24 bg-white">
-        <div className="max-w-4xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <span className="text-[#8B1A2B] text-[12px] tracking-[0.2em] uppercase mb-4 block" style={{ fontWeight: 600 }}>
-              Curriculum
-            </span>
-            <h2 className="text-[28px] lg:text-[36px] text-[#1a1a2e]" style={{ fontWeight: 800 }}>
-              세부 커리큘럼
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {curriculum.map((item, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.05 }}
-                className="bg-white p-6 border border-gray-100 hover:border-[#8B1A2B] transition-all group shadow-sm flex flex-col items-center text-center rounded-xl"
-              >
-                <div className="w-12 h-12 bg-red-50 rounded-full flex items-center justify-center mb-4 group-hover:bg-[#8B1A2B] transition-colors">
-                  <span className="text-[#8B1A2B] text-[13px] group-hover:text-white font-black">W{i + 1}</span>
-                </div>
-                <h4 className="text-[15px] text-[#1a1a2e] font-black mb-2">{item.week}</h4>
-                <p className="text-gray-500 text-[13px] font-medium leading-relaxed">{item.content}</p>
-              </motion.div>
             ))}
           </div>
         </div>
-      </section>
 
-      {/* Final CTA */}
-      <section className="py-16 bg-[#8B1A2B]">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-white text-[26px] lg:text-[32px] mb-3" style={{ fontWeight: 800 }}>
-            전문 번역의 한계를 뛰어넘으세요
-          </h2>
-          <p className="text-white/70 text-[15px] mb-8">
-            AI와 인간의 협업으로 완성하는 최고의 번역 퀄리티
-          </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Link
-              to="/admission"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-white text-[#8B1A2B] text-[16px] hover:bg-gray-100 transition"
-              style={{ fontWeight: 700 }}
-            >
-              수강 신청하기 <ArrowRight className="w-5 h-5" />
-            </Link>
+        <div className="course-section mb-12">
+          <h3 className="section-title">주차별 커리큘럼</h3>
+          <div className="table-wrap">
+            <table className="schedule-table m-0">
+              <thead>
+                <tr>
+                  <th style={{ width: '20%', textAlign: 'center' }}>주차</th>
+                  <th style={{ width: '80%' }}>교육내용</th>
+                </tr>
+              </thead>
+              <tbody>
+                {curriculum.map((item, idx) => (
+                  <tr key={idx}>
+                    <td className="text-center font-bold text-main">{item.week}</td>
+                    <td className="text-muted">{item.content}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
-      </section>
+
+      </div>
     </div>
   );
 }

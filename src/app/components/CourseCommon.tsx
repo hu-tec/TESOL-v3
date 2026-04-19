@@ -67,3 +67,65 @@ export function CoreDesign({ courseName }: CoreDesignProps) {
     </section>
   );
 }
+
+export interface DetailInfoItem {
+  label: string;
+  value: string;
+}
+
+export function DetailInfoGrid({ items }: { items: DetailInfoItem[] }) {
+  return (
+    <div className="bg-white border-y border-gray-100 mb-12">
+      <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-gray-100">
+        {items.map((item, i) => (
+          <li key={i} className="px-8 py-6 flex flex-col gap-1">
+            <span className="text-[#8B1A2B] text-[11px] font-black tracking-widest uppercase opacity-80">{item.label}</span>
+            <span className="text-[#1a1a2e] text-[15px] font-bold">{item.value}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export interface CurriculumTableItem {
+  week: string;
+  content: string;
+  topic?: string;
+}
+
+export function HorizontalScrollTable({ items, title }: { items: CurriculumTableItem[], title?: string }) {
+  return (
+    <div className="py-12 border-t border-gray-100">
+      {title && (
+        <div className="flex items-center gap-3 mb-8">
+          <div className="w-1 h-6 bg-[#8B1A2B]" />
+          <h3 className="text-[20px] text-[#1a1a2e] font-black">{title}</h3>
+        </div>
+      )}
+      <div className="overflow-x-auto -mx-6 px-6 md:mx-0 md:px-0">
+        <table className="w-full min-w-[700px] border-collapse">
+          <thead>
+            <tr className="border-b-2 border-[#1a1a2e]">
+              <th className="py-4 px-6 text-left text-[13px] font-black text-[#1a1a2e] w-[120px]">주차</th>
+              <th className="py-4 px-6 text-left text-[13px] font-black text-[#1a1a2e]">학습 및 교육 내용</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-gray-100">
+            {items.map((item, i) => (
+              <tr key={i} className="hover:bg-gray-50/50 transition-colors">
+                <td className="py-5 px-6 text-[14px] font-black text-[#8B1A2B]">{item.week}</td>
+                <td className="py-5 px-6">
+                  <div className="flex flex-col gap-1">
+                    {item.topic && <span className="text-[15px] font-bold text-[#1a1a2e]">{item.topic}</span>}
+                    <span className="text-[14px] text-gray-600 leading-relaxed font-medium">{item.content}</span>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}

@@ -13,37 +13,35 @@ import {
 
 const navItems = [
   { name: "시험 공통", path: "/admission", icon: Info },
-  { name: "TESOL 교육", path: "/courses/tesol", icon: BookOpen },
-  { name: "AI번역 교육", path: "/courses/ai-translation", icon: Globe },
-  { name: "AI프롬프트 교육", path: "/courses/ai-prompt", icon: Cpu },
-  { name: "AI윤리 교육", path: "/courses/ai-ethics", icon: ShieldCheck },
-  { name: "ITT 정통번역 교육", path: "/courses/itt", icon: Languages },
+  { name: "TESOL", path: "/courses/tesol", icon: BookOpen },
+  { name: "AI 번역", path: "/courses/ai-translation", icon: Globe },
+  { name: "AI 프롬프트", path: "/courses/ai-prompt", icon: Cpu },
+  { name: "AI 윤리", path: "/courses/ai-ethics", icon: ShieldCheck },
+  { name: "ITT 통번역", path: "/courses/itt", icon: Languages },
 ];
 
 export function CourseMenuBar() {
   const location = useLocation();
 
   return (
-    <div className="w-full max-w-[1000px] mx-auto">
-      <div className="bg-[#1a1a2e]/90 backdrop-blur-md border border-white/10 rounded-xl shadow-2xl p-1.5">
-        <div className="grid grid-cols-3 md:grid-cols-6 gap-1">
+    <div className="w-full bg-gray-50 border-y border-gray-200">
+      <div className="container overflow-x-auto no-scrollbar">
+        <div className="flex items-center justify-center min-w-max h-full">
           {navItems.map((item) => {
-            const Icon = item.icon;
             const isActive = location.pathname === item.path;
+            const Icon = item.icon;
             return (
               <Link
                 key={item.path}
                 to={item.path}
-                className={`flex flex-col items-center justify-center py-3 px-2 rounded-lg transition-all ${
+                className={`flex items-center justify-center gap-3 px-10 py-6 text-[16px] font-bold border-x -ml-[1px] transition-all relative min-w-[200px] ${
                   isActive 
-                    ? "bg-[#8B1A2B] text-white shadow-lg" 
-                    : "text-white/60 hover:bg-white/5 hover:text-white"
-                }`}
+                    ? "bg-white text-[#8B1A2B] border-t-4 border-t-[#8B1A2B] z-10 shadow-[0_-5px_15px_rgba(0,0,0,0.05)]" 
+                    : "bg-transparent text-gray-400 border-t-4 border-t-transparent hover:bg-white hover:text-[#1a1a2e]"
+                } border-gray-200`}
               >
-                <Icon className={`w-4 h-4 mb-1.5 transition-transform ${isActive ? "scale-110" : ""}`} />
-                <span className="text-[10px] md:text-[11px] font-bold text-center leading-tight whitespace-nowrap">
-                  {item.name}
-                </span>
+                <Icon className={`w-5 h-5 ${isActive ? 'text-[#8B1A2B]' : 'text-gray-300'}`} />
+                {item.name}
               </Link>
             );
           })}

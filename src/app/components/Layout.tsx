@@ -25,31 +25,41 @@ export function Layout() {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       <ScrollToTop />
       <Header />
-      <main className="flex-1">
+      <main style={{ flex: 1 }}>
         <Outlet />
       </main>
       <Footer />
 
       {/* Floating CTA */}
-      <div className="fixed bottom-6 right-6 z-[60] flex flex-col items-end gap-3">
+      <div style={{ position: 'fixed', bottom: '24px', right: '24px', zIndex: 60, display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '12px' }}>
         <ChatBot />
         {showScrollTop && (
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="w-12 h-12 bg-white text-gray-600 rounded-full shadow-lg border border-gray-200 flex items-center justify-center hover:bg-gray-50 transition-colors"
+            style={{
+              width: '48px', height: '48px', background: 'var(--white)', color: 'var(--text-muted)',
+              borderRadius: '50%', boxShadow: '0 4px 16px rgba(0,0,0,0.1)', border: '1px solid var(--border)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
+              transition: 'all 0.2s'
+            }}
           >
-            <ArrowUp className="w-5 h-5" />
+            <ArrowUp style={{ width: 20, height: 20 }} />
           </button>
         )}
         <Link
           to="/admission"
-          className="w-14 h-14 bg-[#8B1A2B] text-white rounded-full shadow-xl flex items-center justify-center hover:bg-[#6d1422] transition-all hover:scale-105"
+          style={{
+            width: '56px', height: '56px', background: 'var(--primary)', color: 'var(--white)',
+            borderRadius: '50%', boxShadow: '0 4px 20px rgba(155, 34, 38, 0.3)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            transition: 'all 0.2s'
+          }}
           title="수강 신청"
         >
-          <GraduationCap className="w-6 h-6" />
+          <GraduationCap style={{ width: 24, height: 24 }} />
         </Link>
       </div>
     </div>

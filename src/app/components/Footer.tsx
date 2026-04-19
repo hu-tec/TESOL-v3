@@ -1,66 +1,32 @@
 import { Link } from "react-router";
-import { Phone, Mail, MapPin, ArrowRight } from "lucide-react";
+import { Phone, Mail, MapPin } from "lucide-react";
 
 export function Footer() {
   return (
-    <footer className="bg-[#1a1a2e] text-white/60">
-      {/* CTA Banner */}
-      <div className="bg-[#8B1A2B]">
-        <div className="max-w-[1200px] mx-auto px-6 py-12 flex flex-col md:flex-row items-center justify-between gap-6">
-          <div>
-            <h3 className="text-white text-[22px] mb-1" style={{ fontWeight: 700 }}>
-              AI 시대, 당신의 경쟁력을 지금 시작하세요
-            </h3>
-            <p className="text-white/70 text-[15px]">
-              8주 완성 TESOL부터 AI 번역, 프롬프트 교육까지
-            </p>
-          </div>
-          <div className="flex gap-3">
-            <Link
-              to="/admission"
-              className="inline-flex items-center gap-2 px-7 py-3.5 bg-white text-[#8B1A2B] rounded text-[15px] hover:bg-gray-100 transition-colors"
-              style={{ fontWeight: 700 }}
-            >
-              수강 신청하기 <ArrowRight className="w-4 h-4" />
-            </Link>
-            <Link
-              to="/contact"
-              className="inline-flex px-7 py-3.5 border-2 border-white/30 text-white rounded text-[15px] hover:bg-white/10 transition-colors"
-              style={{ fontWeight: 600 }}
-            >
-              1:1 문의
-            </Link>
-          </div>
-        </div>
-      </div>
-
-      {/* Main Footer */}
-      <div className="max-w-[1200px] mx-auto px-6 py-14">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+    <footer className="footer">
+      <div className="container">
+        {/* Contact Info */}
+        <div className="contact-info" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '40px', marginBottom: '40px' }}>
           {/* Company Info */}
           <div>
-            <div className="flex items-center gap-3 mb-5">
-              <div className="w-9 h-9 bg-[#8B1A2B] rounded-full flex items-center justify-center">
-                <span className="text-white text-[11px]" style={{ fontWeight: 700 }}>TM</span>
-              </div>
-              <span className="text-white text-[16px]" style={{ fontWeight: 700 }}>
-                TIMES MEDIA
-              </span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px' }}>
+              <span style={{ color: 'var(--primary)', fontWeight: 700, fontSize: '1.3rem' }}>A. TESOL</span>
+              <span style={{ borderLeft: '1px solid #374151', paddingLeft: '10px', color: '#9ca3af', fontSize: '0.85rem' }}>국제 영어교사 양성과정</span>
             </div>
-            <div className="space-y-2.5 text-[13px]">
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '0.9rem' }}>
               <p>상호명 : 주식회사 타임스미디어</p>
               <p>대표이사 : 김국진</p>
-              <p className="flex items-start gap-2">
-                <MapPin className="w-4 h-4 mt-0.5 shrink-0" />
+              <p style={{ display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
+                <MapPin style={{ width: 16, height: 16, marginTop: 3, flexShrink: 0 }} />
                 서울 서초구 양재천로 19길 26, 6층(양재동)
               </p>
               <p>사업자번호 : 101-86-07479</p>
-              <p className="flex items-center gap-2">
-                <Phone className="w-3.5 h-3.5 shrink-0" />
+              <p style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <Phone style={{ width: 14, height: 14, flexShrink: 0 }} />
                 02-6207-9090
               </p>
-              <p className="flex items-center gap-2">
-                <Mail className="w-3.5 h-3.5 shrink-0" />
+              <p style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <Mail style={{ width: 14, height: 14, flexShrink: 0 }} />
                 hutechc01@gmail.com
               </p>
             </div>
@@ -68,43 +34,43 @@ export function Footer() {
 
           {/* Links 1 */}
           <div>
-            <h4 className="text-white text-[15px] mb-5" style={{ fontWeight: 700 }}>학사소개</h4>
-            <div className="space-y-3 text-[13px]">
-              <Link to="/admission" className="block hover:text-white transition-colors">학사소개</Link>
-              <Link to="/admission" className="block hover:text-white transition-colors">입학 안내</Link>
+            <h4 style={{ color: 'var(--white)', fontSize: '1rem', fontWeight: 700, marginBottom: '16px' }}>교육프로그램</h4>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '0.9rem' }}>
+              <Link to="/courses/tesol" style={{ color: '#d1d5db', transition: 'color 0.2s' }}>TESOL 영어교육</Link>
+              <Link to="/courses/ai-translation" style={{ color: '#d1d5db', transition: 'color 0.2s' }}>AI 번역·통역</Link>
+              <Link to="/courses/itt" style={{ color: '#d1d5db', transition: 'color 0.2s' }}>ITT 정통 통번역</Link>
+              <Link to="/courses/ai-prompt" style={{ color: '#d1d5db', transition: 'color 0.2s' }}>AI 프롬프트</Link>
+              <Link to="/courses/ai-ethics" style={{ color: '#d1d5db', transition: 'color 0.2s' }}>AI 윤리</Link>
             </div>
           </div>
 
           {/* Links 2 */}
           <div>
-            <h4 className="text-white text-[15px] mb-5" style={{ fontWeight: 700 }}>교육프로그램</h4>
-            <div className="space-y-3 text-[13px]">
-              <Link to="/courses/tesol" className="block hover:text-white transition-colors">TESOL 영어교육</Link>
-              <Link to="/courses/ai-translation" className="block hover:text-white transition-colors">AI 번역·통역</Link>
-              <Link to="/courses/itt" className="block hover:text-white transition-colors">ITT 정통 통번역</Link>
-              <Link to="/courses/ai-prompt" className="block hover:text-white transition-colors">AI 프롬프트</Link>
-              <Link to="/courses/ai-ethics" className="block hover:text-white transition-colors">AI 윤리</Link>
+            <h4 style={{ color: 'var(--white)', fontSize: '1rem', fontWeight: 700, marginBottom: '16px' }}>학사소개</h4>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '0.9rem' }}>
+              <Link to="/about" style={{ color: '#d1d5db', transition: 'color 0.2s' }}>교육원 소개</Link>
+              <Link to="/admission" style={{ color: '#d1d5db', transition: 'color 0.2s' }}>입학 안내</Link>
             </div>
           </div>
 
           {/* Links 3 */}
           <div>
-            <h4 className="text-white text-[15px] mb-5" style={{ fontWeight: 700 }}>지원 서비스</h4>
-            <div className="space-y-3 text-[13px]">
-              <a href="#" className="block hover:text-white transition-colors">레벨테스트 신청</a>
-              <a href="#" className="block hover:text-white transition-colors">설명회 신청</a>
-              <a href="#" className="block hover:text-white transition-colors">자격증 발급 신청</a>
-              <Link to="/contact" className="block hover:text-white transition-colors">1:1 문의</Link>
+            <h4 style={{ color: 'var(--white)', fontSize: '1rem', fontWeight: 700, marginBottom: '16px' }}>지원 서비스</h4>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '0.9rem' }}>
+              <a href="#" style={{ color: '#d1d5db', transition: 'color 0.2s' }}>레벨테스트 신청</a>
+              <a href="#" style={{ color: '#d1d5db', transition: 'color 0.2s' }}>설명회 신청</a>
+              <a href="#" style={{ color: '#d1d5db', transition: 'color 0.2s' }}>자격증 발급 신청</a>
+              <Link to="/contact" style={{ color: '#d1d5db', transition: 'color 0.2s' }}>1:1 문의</Link>
             </div>
           </div>
         </div>
 
-        {/* Bottom */}
-        <div className="border-t border-white/10 pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-[12px] text-white/30">
+        {/* Copyright */}
+        <div className="copy">
           <p>&copy; 2025 Times Media Inc. All rights reserved.</p>
-          <div className="flex gap-5">
-            <a href="#" className="hover:text-white/50 transition-colors">이용약관</a>
-            <a href="#" className="hover:text-white/50 transition-colors">개인정보처리방침</a>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', marginTop: '8px' }}>
+            <a href="#" style={{ color: '#9ca3af', transition: 'color 0.2s', fontSize: '0.8rem' }}>이용약관</a>
+            <a href="#" style={{ color: '#9ca3af', transition: 'color 0.2s', fontSize: '0.8rem' }}>개인정보처리방침</a>
           </div>
         </div>
       </div>

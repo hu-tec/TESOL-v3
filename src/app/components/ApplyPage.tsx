@@ -6,9 +6,9 @@ import type { Applicant } from "./types";
 
 const PATH_TYPE_MAP: Record<string, string> = {
   "level-test": "레벨테스트",
-  "tip": "테스트 TIP 신청",
-  "corporate": "1:1문의",
-  "seminar": "설명회신청",
+  "tip": "테스트 TIP",
+  "corporate": "상담신청",
+  "seminar": "설명회",
   "orientation": "수업신청",
 };
 

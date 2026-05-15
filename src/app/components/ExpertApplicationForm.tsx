@@ -4,6 +4,7 @@ import { Input } from "./ui/input";
 import { Checkbox } from "./ui/checkbox";
 import { Textarea } from "./ui/textarea";
 import { toast } from "sonner";
+import "./ExpertApplicationForm.css";
 
 interface ExpertApplicationFormProps {
   onSubmit: (applicant: Applicant) => void;
@@ -28,11 +29,11 @@ export function ExpertApplicationForm({
     { label: "기타", en: "Other" },
   ];
   const applicationTypeOptions = [
-    { label: "수업신청", en: "Class Apply" },
+    { label: "상담신청", en: "Counseling" },
     { label: "레벨테스트", en: "Level Test" },
-    { label: "설명회신청", en: "Seminar" },
-    { label: "테스트 TIP 신청", en: "Test TIP" },
-    { label: "1:1문의", en: "1:1 Inquiry" },
+    { label: "수업신청", en: "Class Apply" },
+    { label: "설명회", en: "Seminar" },
+    { label: "테스트 TIP", en: "Test TIP" },
   ];
   const regionOptions = [
     { label: "서울 강남", en: "Seoul Gangnam" },
@@ -44,14 +45,12 @@ export function ExpertApplicationForm({
     { label: "강원도", en: "Gangwon-do" },
     { label: "제주도", en: "Jeju-do" },
   ];
-  const offlineTypes = ["수업신청", "레벨테스트", "설명회신청"];
-  const courseOptions = [
-    { label: "TESOL", en: "TESOL" },
-    { label: "프롬프트", en: "Prompt" },
-    { label: "AI 번역", en: "AI Translation" },
-    { label: "AI윤리", en: "AI Ethics" },
-    { label: "ITT 번역교육", en: "ITT Translation" },
-  ];
+  const offlineTypes = ["수업신청", "레벨테스트", "설명회"];
+  const courseCategoryOptions = ["일반과정", "AI 과정"];
+  const courseDetailOptions: Record<string, string[]> = {
+    일반과정: ["테솔", "영어 방과후 교사", "ITT 통역번역"],
+    "AI 과정": ["AI프롬프트", "AI윤리", "AI 통역번역", "AI 방과후 교사"],
+  };
   const jobOptions = [
     { label: "학생", en: "Student" },
     { label: "대학생", en: "Univ. Student" },
@@ -66,6 +65,7 @@ export function ExpertApplicationForm({
   const [phone, setPhone] = useState("");
   const [nationality, setNationality] = useState<string[]>([]);
   const [discoveryChannels, setDiscoveryChannels] = useState<string[]>([]);
+  const [courseCategory, setCourseCategory] = useState("");
   const [course, setCourse] = useState("");
   const [job, setJob] = useState("");
   const [introduction, setIntroduction] = useState("");
@@ -89,6 +89,9 @@ export function ExpertApplicationForm({
     () => offlineTypes.includes(applicationType),
     [applicationType]
   );
+  const selectedCourseOptions = courseCategory
+    ? courseDetailOptions[courseCategory] ?? []
+    : [];
 
   const handlePhoneChange = (value: string) => {
     const n = value.replace(/[^0-9]/g, "");
@@ -109,7 +112,8 @@ export function ExpertApplicationForm({
 
   const validateStep1 = (): boolean => {
     if (!applicationType) return toast.error("신청 유형을 선택해주세요."), false;
-    if (!course) return toast.error("지원 구분을 선택해주세요."), false;
+    if (!courseCategory) return toast.error("과정을 선택해주세요."), false;
+    if (!course) return toast.error("세부 과정을 선택해주세요."), false;
     if (!name.trim()) return toast.error("이름을 입력해주세요."), false;
     if (!phone.trim()) return toast.error("연락처를 입력해주세요."), false;
     if (!email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return toast.error("올바른 이메일을 입력해주세요."), false;
@@ -129,7 +133,7 @@ export function ExpertApplicationForm({
       if (!scheduleDate1 && !scheduleDate2) return toast.error("오프라인 신청의 일자를 1개 이상 선택해주세요."), false;
       if (!scheduleTime1 && !scheduleTime2) return toast.error("오프라인 신청의 시간을 1개 이상 선택해주세요."), false;
     } else {
-      if (applicationType === "1:1문의" && !inquiryContent.trim()) return toast.error("문의할 내용을 입력해주세요."), false;
+      if (applicationType === "상담신청" && !inquiryContent.trim()) return toast.error("문의할 내용을 입력해주세요."), false;
     }
     return true;
   };
@@ -154,10 +158,10 @@ export function ExpertApplicationForm({
         email,
         phone,
         birthDate,
-        course,
+        course: `${courseCategory} / ${course}`,
         job,
         introduction: `${introduction}\n국적구분: ${nationality.join(", ")} | 신청경로: ${discoveryChannels.join(", ")}${
-          applicationType === "1:1문의" ? `\n문의내용: ${inquiryContent}` : ""
+          applicationType === "상담신청" ? `\n문의내용: ${inquiryContent}` : ""
         }`,
       },
       application: {
@@ -188,6 +192,7 @@ export function ExpertApplicationForm({
     setPhone("");
     setBirthDate("");
     setNationality([]);
+    setCourseCategory("");
     setCourse("");
     setJob("");
     setDiscoveryChannels([]);
@@ -203,228 +208,214 @@ export function ExpertApplicationForm({
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto space-y-4">
-      <div className="flex flex-wrap gap-2 justify-center md:justify-start px-1">
-        {applicationTypeOptions.map((option) => (
-          <button
-            key={option.label}
-            onClick={() => {
-              setApplicationType(option.label);
-              setCurrentStep(1);
-            }}
-            className={`px-4 py-2 rounded-xl text-sm font-medium transition-colors border shadow-sm flex items-center gap-1 ${
-              applicationType === option.label
-                ? "border-[#8B1A2B] bg-white text-[#8B1A2B]"
-                : "border-black/10 bg-[#fafafa] text-black/60 hover:bg-white"
-            }`}
-          >
-            {option.label}
-            <span className={`text-[10px] font-normal ${applicationType === option.label ? 'text-[#8B1A2B]/60' : 'text-black/40'}`}>
-              {option.en}
-            </span>
-          </button>
-        ))}
-      </div>
-
-      <div className="border border-black/10 rounded-xl p-5 md:p-7 bg-white shadow-sm">
-        <div className="flex flex-col sm:flex-row sm:items-center border-b border-black/10 pb-5 gap-5 sm:gap-0 mb-5">
-          <p className="text-xl font-bold text-black sm:w-1/3">신청서 <span className="text-xs font-normal text-black/40 ml-1">Application Form</span></p>
-
-          <div className="flex items-center w-full max-w-[240px] mx-auto sm:w-1/3">
-            <div className={`w-7 h-7 shrink-0 rounded-full flex items-center justify-center text-xs font-bold z-10 transition-colors ${currentStep >= 1 ? 'bg-[#8B1A2B] text-white' : 'bg-gray-200 text-gray-400'}`}>
-              1
-            </div>
-            <div className={`h-[3px] flex-1 -mx-1 z-0 transition-colors ${currentStep >= 2 ? 'bg-[#8B1A2B]' : 'bg-gray-200'}`} />
-            <div className={`w-7 h-7 shrink-0 rounded-full flex items-center justify-center text-xs font-bold z-10 transition-colors ${currentStep >= 2 ? 'bg-[#8B1A2B] text-white' : 'bg-gray-200 text-gray-400'}`}>
-              2
-            </div>
-            <div className="h-[3px] flex-1 -mx-1 z-0 bg-gray-200" />
-            <div className="w-7 h-7 shrink-0 rounded-full flex items-center justify-center text-xs font-bold z-10 bg-gray-200 text-gray-400">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            </div>
+    <div className="expert-application-form">
+      <div className="application-panel">
+        <div className="application-header">
+          <div className="application-title">
+            <strong>신청서</strong>
+            <span>Application Form</span>
           </div>
 
-          <div className="hidden sm:block sm:w-1/3"></div>
+          <div className="application-progress" aria-hidden="true">
+            <span className={`progress-step ${currentStep >= 1 ? "is-active" : ""}`}>1</span>
+            <span className={`progress-line ${currentStep >= 2 ? "is-active" : ""}`} />
+            <span className={`progress-step ${currentStep >= 2 ? "is-active" : ""}`}>2</span>
+            <span className="progress-line" />
+            <span className="progress-step">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </span>
+          </div>
+
+          <div className="application-header-spacer" />
         </div>
 
         {currentStep === 1 && (
-          <div className="space-y-6 pt-2">
-            <div className="space-y-2 border-b border-black/10 pb-5 mb-2">
-              <p className="text-sm text-black/80 font-bold">
-                지원 구분 <span className="text-xs font-normal text-black/40 ml-1">Course</span>
-                <span className="text-[#8B1A2B] ml-1">*</span>
-              </p>
-              <div className="flex flex-wrap gap-x-3 gap-y-2 mt-2">
-                {courseOptions.map((option) => (
-                  <label
-                    key={option.label}
-                    className={`flex items-center gap-1.5 px-3 py-1.5 border rounded-md cursor-pointer text-sm transition-colors ${
-                      course === option.label ? 'border-[#8B1A2B] bg-[#8B1A2B]/5 text-[#8B1A2B] font-medium' : 'border-black/10 hover:bg-[#f4f4f5]'
-                    }`}
+          <div className="application-step">
+            <section className="form-section">
+              <h3 className="section-heading">
+                지원 구분 <span>Course</span> <em>*</em>
+              </h3>
+              <div className="course-select-row">
+                <select
+                  aria-label="과정 구분"
+                  value={courseCategory}
+                  onChange={(e) => {
+                    setCourseCategory(e.target.value);
+                    setCourse("");
+                  }}
+                  className="course-select"
+                >
+                  <option value="">과정 선택</option>
+                  {courseCategoryOptions.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
+
+                {courseCategory && (
+                  <select
+                    aria-label="세부 과정"
+                    value={course}
+                    onChange={(e) => setCourse(e.target.value)}
+                    className="course-select"
                   >
-                    <Checkbox
-                      checked={course === option.label}
-                      onCheckedChange={() => setCourse(option.label)}
-                      className="hidden"
-                    />
-                    {option.label}
-                    <span className={`text-[10px] font-normal ${course === option.label ? 'text-[#8B1A2B]/60' : 'text-black/40'}`}>
-                      {option.en}
-                    </span>
-                  </label>
-                ))}
+                    <option value="">세부 과정 선택</option>
+                    {selectedCourseOptions.map((option) => (
+                      <option key={option} value={option}>
+                        {option}
+                      </option>
+                    ))}
+                  </select>
+                )}
               </div>
-            </div>
-
-            <div className="space-y-4">
-              <p className="text-sm text-black/80 font-bold">
-                기본 인적사항 <span className="text-xs font-normal text-black/40 ml-1">Basic Information</span>
-              </p>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-1.5">
-                  <p className="text-xs text-black/60 font-medium">성명 <span className="text-[10px] text-black/30 ml-0.5">Name</span> *</p>
-                  <Input value={name} onChange={(e) => setName(e.target.value)} placeholder="성명 입력" className="h-9 text-sm" />
-                </div>
-                <div className="space-y-1.5">
-                  <p className="text-xs text-black/60 font-medium">연락처 <span className="text-[10px] text-black/30 ml-0.5">Phone</span> *</p>
-                  <Input value={phone} onChange={(e) => handlePhoneChange(e.target.value)} placeholder="010-1234-5678" maxLength={13} className="h-9 text-sm" />
-                </div>
-                <div className="space-y-1.5">
-                  <p className="text-xs text-black/60 font-medium">이메일 <span className="text-[10px] text-black/30 ml-0.5">E-mail</span> *</p>
-                  <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="example@email.com" className="h-9 text-sm" />
-                </div>
-                <div className="space-y-1.5">
-                  <p className="text-xs text-black/60 font-medium">생년월일 <span className="text-[10px] text-black/30 ml-0.5">Birth Date</span> *</p>
-                  <Input type="date" value={birthDate} onChange={(e) => setBirthDate(e.target.value)} className="h-9 text-sm text-black/70" />
-                </div>
-              </div>
-
-              <div className="space-y-1.5 pt-2">
-                <p className="text-xs text-black/60 font-medium">내국인·외국인·재외국인 <span className="text-[10px] text-black/30 ml-0.5">Nationality</span> *</p>
-                <div className="flex flex-wrap gap-x-4 gap-y-2">
-                  {nationalityOptions.map((option) => (
-                    <label key={option.label} className="flex items-center gap-1.5 text-sm cursor-pointer">
-                      <Checkbox checked={nationality.includes(option.label)} onCheckedChange={() => toggle(option.label, nationality, setNationality)} />
+              <div className="application-select-field">
+                <label className="field-label" htmlFor="application-type-select">
+                  신청 <span>Application</span> <em>*</em>
+                </label>
+                <select
+                  id="application-type-select"
+                  value={applicationType}
+                  onChange={(e) => {
+                    setApplicationType(e.target.value);
+                    setCurrentStep(1);
+                  }}
+                  className="application-type-select"
+                >
+                  {applicationTypeOptions.map((option) => (
+                    <option key={option.label} value={option.label}>
                       {option.label}
-                      <span className="text-[10px] text-black/40">{option.en}</span>
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </section>
+
+            <section className="form-section basic-section">
+              <h3 className="section-heading">
+                기본 인적사항 <span>Basic Information</span>
+              </h3>
+
+              <div className="field-grid">
+                <div className="form-field">
+                  <label className="field-label">성명 <span>Name</span> <em>*</em></label>
+                  <Input value={name} onChange={(e) => setName(e.target.value)} placeholder="성명 입력" className="form-control" />
+                </div>
+                <div className="form-field">
+                  <label className="field-label">연락처 <span>Phone</span> <em>*</em></label>
+                  <Input value={phone} onChange={(e) => handlePhoneChange(e.target.value)} placeholder="010-1234-5678" maxLength={13} className="form-control" />
+                </div>
+                <div className="form-field">
+                  <label className="field-label">이메일 <span>E-mail</span> <em>*</em></label>
+                  <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="example@email.com" className="form-control" />
+                </div>
+                <div className="form-field">
+                  <label className="field-label">생년월일 <span>Birth Date</span> <em>*</em></label>
+                  <Input type="date" value={birthDate} onChange={(e) => setBirthDate(e.target.value)} className="form-control date-control" />
+                </div>
+              </div>
+
+              <div className="form-field nationality-field">
+                <label className="field-label">내국인·외국인·재외국인 <span>Nationality</span> <em>*</em></label>
+                <div className="checkbox-row">
+                  {nationalityOptions.map((option) => (
+                    <label key={option.label} className="checkbox-choice">
+                      <Checkbox checked={nationality.includes(option.label)} onCheckedChange={() => toggle(option.label, nationality, setNationality)} />
+                      <span>{option.label}</span>
+                      <span className="choice-en">{option.en}</span>
                     </label>
                   ))}
                 </div>
               </div>
-            </div>
+            </section>
 
-            <div className="flex justify-between pt-4 pb-2 border-t border-black/10">
-              <button
-                onClick={handleCancel}
-                className="text-sm px-6 h-10 rounded-md border border-black/10 hover:bg-[#f4f4f5] font-medium flex items-center gap-1.5"
-              >
-                취소 <span className="text-[10px] text-black/40 font-normal">Cancel</span>
+            <div className="form-actions">
+              <button type="button" onClick={handleCancel} className="secondary-action">
+                취소 <span>Cancel</span>
               </button>
-              <button
-                onClick={goToStep2}
-                className="text-sm px-8 h-10 rounded-md bg-[#8B1A2B] text-white hover:bg-[#8B1A2B]/90 font-medium flex items-center gap-1.5"
-              >
-                다음 단계로 <span className="text-[10px] text-white/50 font-normal">Next Step</span>
+              <button type="button" onClick={goToStep2} className="primary-action">
+                다음 단계로 <span>Next Step</span>
               </button>
             </div>
           </div>
         )}
 
         {currentStep === 2 && (
-          <div className="space-y-6 pt-2">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 border-b border-black/10 pb-5">
-              <div className="space-y-1.5">
-                <p className="text-xs text-black/60 font-medium">직업 <span className="text-[10px] text-black/30 ml-0.5">Job</span> *</p>
-                <div className="flex flex-wrap gap-x-4 gap-y-2">
-                  {jobOptions.map((option) => (
-                    <label key={option.label} className="flex items-center gap-1.5 text-sm cursor-pointer">
-                      <Checkbox checked={job === option.label} onCheckedChange={() => setJob(option.label)} className="rounded-full" />
-                      {option.label}
-                      <span className="text-[10px] text-black/40">{option.en}</span>
-                    </label>
-                  ))}
+          <div className="application-step">
+            <section className="form-section">
+              <div className="field-grid">
+                <div className="form-field">
+                  <label className="field-label">직업 <span>Job</span> <em>*</em></label>
+                  <div className="checkbox-row">
+                    {jobOptions.map((option) => (
+                      <label key={option.label} className="checkbox-choice">
+                        <Checkbox checked={job === option.label} onCheckedChange={() => setJob(option.label)} className="round-checkbox" />
+                        <span>{option.label}</span>
+                        <span className="choice-en">{option.en}</span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+                <div className="form-field">
+                  <label className="field-label">신청을 알게 된 경로 <span>Discovery Channel</span> <em>*</em></label>
+                  <div className="checkbox-row">
+                    {discoveryOptions.map((option) => (
+                      <label key={option.label} className="checkbox-choice">
+                        <Checkbox checked={discoveryChannels.includes(option.label)} onCheckedChange={() => toggle(option.label, discoveryChannels, setDiscoveryChannels)} />
+                        <span>{option.label}</span>
+                        <span className="choice-en">{option.en}</span>
+                      </label>
+                    ))}
+                  </div>
                 </div>
               </div>
-              <div className="space-y-1.5">
-                <p className="text-xs text-black/60 font-medium">신청을 알게 된 경로 <span className="text-[10px] text-black/30 ml-0.5">Discovery Channel</span> *</p>
-                <div className="flex flex-wrap gap-x-4 gap-y-2">
-                  {discoveryOptions.map((option) => (
-                    <label key={option.label} className="flex items-center gap-1.5 text-sm cursor-pointer">
-                      <Checkbox checked={discoveryChannels.includes(option.label)} onCheckedChange={() => toggle(option.label, discoveryChannels, setDiscoveryChannels)} />
-                      {option.label}
-                      <span className="text-[10px] text-black/40">{option.en}</span>
-                    </label>
-                  ))}
-                </div>
-              </div>
-            </div>
+            </section>
 
             {isOfflineType ? (
-              <div className="space-y-5 border border-black/10 rounded-xl p-5 bg-[#fafafa]">
-                <p className="text-sm text-black/80 font-bold pb-2 border-b border-black/5">신청 정보 <span className="text-xs font-normal text-black/40 ml-1">Offline Information</span></p>
+              <section className="form-section offline-section">
+                <h3 className="section-heading">
+                  신청 정보 <span>Offline Information</span>
+                </h3>
 
-                <div className="space-y-2 pt-1">
-                  <p className="text-xs text-black/60 font-medium">지역 <span className="text-[10px] text-black/30 ml-0.5">Region</span> * <span className="text-[10px] font-normal text-black/40">(복수 선택 가능)</span></p>
-                  <div className="flex flex-wrap gap-x-2 gap-y-2">
+                <div className="form-field">
+                  <label className="field-label">지역 <span>Region</span> <em>*</em> <small>(복수 선택 가능)</small></label>
+                  <div className="option-pills region-pills">
                     {regionOptions.map((option) => (
                       <label
                         key={option.label}
-                        className={`flex items-center gap-1.5 px-3 py-1.5 border rounded-md cursor-pointer text-xs transition-colors ${
-                          region.includes(option.label) ? 'border-black bg-black text-white' : 'border-black/10 hover:bg-[#f4f4f5] bg-white text-black'
-                        }`}
+                        className={`option-pill compact ${region.includes(option.label) ? "is-dark-selected" : ""}`}
                       >
                         <Checkbox
                           checked={region.includes(option.label)}
                           onCheckedChange={() => toggle(option.label, region, setRegion)}
-                          className="hidden"
+                          className="option-checkbox-hidden"
                         />
-                        {option.label}
-                        <span className={`text-[10px] font-normal ${region.includes(option.label) ? 'text-white/60' : 'text-black/40'}`}>
-                          {option.en}
-                        </span>
+                        <span>{option.label}</span>
+                        <span className="option-en">{option.en}</span>
                       </label>
                     ))}
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <p className="text-xs text-black/60 font-medium">일자 <span className="text-[10px] text-black/30 ml-0.5">Date</span> *</p>
-                    <div className="flex flex-col gap-2">
-                      <Input
-                        type="date"
-                        value={scheduleDate1}
-                        onChange={(e) => setScheduleDate1(e.target.value)}
-                        className="h-9 text-sm bg-white"
-                      />
-                      <Input
-                        type="date"
-                        value={scheduleDate2}
-                        onChange={(e) => setScheduleDate2(e.target.value)}
-                        className="h-9 text-sm bg-white"
-                      />
+                <div className="field-grid">
+                  <div className="form-field">
+                    <label className="field-label">일자 <span>Date</span> <em>*</em></label>
+                    <div className="stacked-controls">
+                      <Input type="date" value={scheduleDate1} onChange={(e) => setScheduleDate1(e.target.value)} className="form-control" />
+                      <Input type="date" value={scheduleDate2} onChange={(e) => setScheduleDate2(e.target.value)} className="form-control" />
                     </div>
                   </div>
 
-                  <div className="space-y-2">
-                    <p className="text-xs text-black/60 font-medium">시간 <span className="text-[10px] text-black/30 ml-0.5">Time</span> *</p>
-                    <div className="flex flex-col gap-2">
-                      <select
-                        value={scheduleTime1}
-                        onChange={(e) => setScheduleTime1(e.target.value)}
-                        className="flex h-9 w-full items-center justify-between rounded-md border border-input bg-white px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                      >
+                  <div className="form-field">
+                    <label className="field-label">시간 <span>Time</span> <em>*</em></label>
+                    <div className="stacked-controls">
+                      <select value={scheduleTime1} onChange={(e) => setScheduleTime1(e.target.value)} className="form-control">
                         <option value="">선택</option>
                         {timeOptions.map((time) => (
                           <option key={time} value={time}>{time}</option>
                         ))}
                       </select>
-                      <select
-                        value={scheduleTime2}
-                        onChange={(e) => setScheduleTime2(e.target.value)}
-                        className="flex h-9 w-full items-center justify-between rounded-md border border-input bg-white px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                      >
+                      <select value={scheduleTime2} onChange={(e) => setScheduleTime2(e.target.value)} className="form-control">
                         <option value="">선택</option>
                         {timeOptions.map((time) => (
                           <option key={time} value={time}>{time}</option>
@@ -433,50 +424,35 @@ export function ExpertApplicationForm({
                     </div>
                   </div>
                 </div>
-              </div>
+              </section>
             ) : (
-              <div className="space-y-1.5 border-b border-black/10 pb-5 mb-2">
-                <p className="text-xs text-black/60 font-medium">문의 내용 <span className="text-[10px] text-black/30 ml-0.5">Inquiry Content</span> *</p>
-                <Textarea
-                  value={inquiryContent}
-                  onChange={(e) => setInquiryContent(e.target.value)}
-                  placeholder="문의하실 내용을 상세히 적어주세요."
-                  className="min-h-[160px] text-sm mt-2"
-                />
-              </div>
+              <section className="form-section">
+                <label className="field-label">문의 내용 <span>Inquiry Content</span> <em>*</em></label>
+                <Textarea value={inquiryContent} onChange={(e) => setInquiryContent(e.target.value)} placeholder="문의하실 내용을 상세히 적어주세요." className="form-textarea large" />
+              </section>
             )}
 
-            <div className="space-y-1.5 border-b border-black/10 pb-5 pt-2">
-              <p className="text-xs text-black/60 font-medium">자기소개 <span className="text-[10px] text-black/30 ml-0.5">Introduction</span> *</p>
-              <Textarea
-                value={introduction}
-                onChange={(e) => setIntroduction(e.target.value)}
-                placeholder="교육 참여 목적과 학습 목표를 간단히 적어주세요."
-                className="min-h-[100px] text-sm"
-              />
-            </div>
+            <section className="form-section">
+              <label className="field-label">자기소개 <span>Introduction</span> <em>*</em></label>
+              <Textarea value={introduction} onChange={(e) => setIntroduction(e.target.value)} placeholder="교육 참여 목적과 학습 목표를 간단히 적어주세요." className="form-textarea" />
+            </section>
 
-            <label className="flex items-start gap-2.5 cursor-pointer pt-2">
+            <label className="privacy-choice checkbox-choice">
               <Checkbox checked={privacyConsent} onCheckedChange={(checked) => setPrivacyConsent(Boolean(checked))} />
-              <span className="text-sm text-black/70">개인정보제공 약관동의 * <span className="text-xs ml-0.5 text-black/40">Privacy Policy Consent</span></span>
+              <span>개인정보제공 약관동의 *</span>
+              <span className="choice-en">Privacy Policy Consent</span>
             </label>
 
-            <div className="flex justify-between pt-6 pb-2">
-              <button
-                onClick={() => setCurrentStep(1)}
-                className="text-sm px-6 h-10 rounded-md border border-black/10 hover:bg-[#f4f4f5] font-medium flex items-center gap-1.5"
-              >
-                이전 단계로 <span className="text-[10px] text-black/40 font-normal">Prev Step</span>
+            <div className="form-actions step-two-actions">
+              <button type="button" onClick={() => setCurrentStep(1)} className="secondary-action">
+                이전 단계로 <span>Prev Step</span>
               </button>
-              <button
-                onClick={handleSubmit}
-                className="text-sm px-8 h-10 rounded-md bg-[#8B1A2B] text-white hover:bg-[#8B1A2B]/90 font-medium flex items-center gap-1.5"
-              >
-                제출하기 <span className="text-[10px] text-white/50 font-normal">Submit</span>
+              <button type="button" onClick={handleSubmit} className="primary-action">
+                제출하기 <span>Submit</span>
               </button>
             </div>
 
-            <div className="text-[10px] text-black/35 space-y-1.5 leading-[1.4] pt-5 border-t border-black/5">
+            <div className="refund-note">
               <p>Registration fee for the program is non-refundable. Start of the program refers to the class starting date at Times Media. Full refund of tution will not be issoed on or after the class starting date. Partial refund of tution may be issued in the First half of the class.</p>
               <p>I understand for the Times Media refund policy and i agree to follow the policy</p>
             </div>
